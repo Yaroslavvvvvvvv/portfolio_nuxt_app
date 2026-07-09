@@ -23,7 +23,10 @@ const title = computed(() =>
 )
 const backLabel = computed(() => (isUk.value ? 'На головну' : 'Back to home'))
 
-useHead({ htmlAttrs: { lang: () => (isUk.value ? 'uk' : 'en') } })
+useHead({
+  htmlAttrs: { lang: () => (isUk.value ? 'uk' : 'en') },
+  title: () => title.value,
+})
 </script>
 
 <template>
