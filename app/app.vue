@@ -9,9 +9,9 @@ const toastPt = computed(() => ({
 // browsers fall back to the URL — and on SPA navigation (e.g. returning from an
 // error route) the stale URL sticks in the tab. Pages set their own title; those
 // without one fall back to the site name.
-const SITE_NAME = 'Starter'
+const site = useSiteConfig()
 useHead({
-  titleTemplate: (title) => (title ? `${title} · ${SITE_NAME}` : SITE_NAME),
+  titleTemplate: (title) => (title ? `${title} · ${site.name}` : site.name),
 })
 </script>
 

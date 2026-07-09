@@ -1,4 +1,4 @@
-export type FieldType = 'text' | 'textarea' | 'boolean' | 'number' | 'list'
+export type FieldType = 'text' | 'textarea' | 'boolean' | 'number' | 'list' | 'image' | 'richtext'
 
 export interface ResourceField {
   name: string

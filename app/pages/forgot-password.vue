@@ -1,7 +1,7 @@
 <script setup lang="ts">
 definePageMeta({ layout: 'auth' })
 const { t } = useI18n()
-useSeoMeta({ title: () => t('auth.forgotTitle') })
+usePageSeo(() => ({ title: t('auth.forgotTitle'), noindex: true }))
 const email = ref('')
 const done = ref(false)
 </script>

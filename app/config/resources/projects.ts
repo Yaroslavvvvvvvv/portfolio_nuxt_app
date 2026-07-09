@@ -1,4 +1,5 @@
 import type { ResourceConfig } from './types'
+import { seoFields } from './seo'
 
 export const projectResource: ResourceConfig = {
   name: 'projects',
@@ -19,9 +20,10 @@ export const projectResource: ResourceConfig = {
     { name: 'type', label: 'fields.type', type: 'text' },
     { name: 'year', label: 'fields.year', type: 'number' },
     { name: 'description', label: 'fields.shortDescription', type: 'textarea' },
-    { name: 'content', label: 'fields.contentHtml', type: 'textarea' },
-    { name: 'imagePath', label: 'fields.image', type: 'text' },
+    { name: 'content', label: 'fields.contentHtml', type: 'richtext' },
+    { name: 'imagePath', label: 'fields.image', type: 'image' },
     { name: 'position', label: 'fields.position', type: 'number' },
     { name: 'isPublished', label: 'fields.isPublished', type: 'boolean' },
+    ...seoFields,
   ],
 }

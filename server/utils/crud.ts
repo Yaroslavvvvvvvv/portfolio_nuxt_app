@@ -49,12 +49,22 @@ function mapWriteError(err: any) {
   return err
 }
 
+// Columns a client may sort by: the resource's own fields plus the timestamps
+// every model shares. An unknown field would make Prisma throw a 500, so it
+// falls back to the resource default instead.
+function resolveSortField(cfg: CrudConfig, requested: unknown): string {
+  const fallback = cfg.defaultSort?.field ?? 'id'
+  if (typeof requested !== 'string') return fallback
+  const allowed = new Set([...cfg.fillable, 'id', 'createdAt', 'updatedAt'])
+  return allowed.has(requested) ? requested : fallback
+}
+
 export async function crudList(event: H3Event, cfg: CrudConfig) {
   const q = getQuery(event)
   const page = Math.max(1, Number(q.page ?? 1))
   const perPage = Math.min(100, Math.max(1, Number(q.perPage ?? 10)))
   const search = String(q.search ?? '').trim()
-  const sortField = String(q.sortField ?? cfg.defaultSort?.field ?? 'id')
+  const sortField = resolveSortField(cfg, q.sortField)
   const sortOrder = q.sortOrder === 'asc' || q.sortOrder === 'desc'
     ? q.sortOrder
     : (cfg.defaultSort?.order ?? 'desc')

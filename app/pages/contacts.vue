@@ -3,7 +3,7 @@ import * as yup from 'yup'
 import { emailRule, validateSchema } from '~/utils/validation'
 
 const { t } = useI18n()
-useSeoMeta({ title: () => t('contacts.title') })
+usePageSeo(() => ({ title: t('contacts.title'), description: t('meta.contacts') }))
 const toast = useToast()
 const form = reactive({ name: '', email: '', message: '' })
 const fieldErrors = reactive<Record<string, string>>({ name: '', email: '', message: '' })

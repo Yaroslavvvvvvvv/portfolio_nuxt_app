@@ -48,7 +48,14 @@ export default defineNuxtConfig({
     layoutTransition: { name: 'layout', mode: 'out-in' },
   },
 
-  modules: ['@primevue/nuxt-module', 'nuxt-auth-utils', '@pinia/nuxt', '@nuxtjs/i18n'],
+  modules: [
+    '@primevue/nuxt-module',
+    'nuxt-auth-utils',
+    '@pinia/nuxt',
+    '@nuxtjs/i18n',
+    '@nuxtjs/sitemap',
+    '@nuxtjs/robots',
+  ],
 
   components: [{ path: '~/components', pathPrefix: false }],
 
@@ -69,7 +76,29 @@ export default defineNuxtConfig({
     },
   },
 
+  // Canonical origin for absolute URLs (canonical tags, og:image, sitemap).
+  // Override per environment with NUXT_PUBLIC_SITE_URL.
+  site: {
+    url: process.env.NUXT_PUBLIC_SITE_URL || 'http://localhost:3000',
+    name: 'Starter',
+  },
+
+  robots: {
+    // The admin SPA and the API have nothing to index.
+    disallow: ['/admin', '/api/'],
+  },
+
+  sitemap: {
+    // Static public routes are discovered automatically; the dynamic ones
+    // (blog posts, project cases, static pages) come from the DB via this source.
+    sources: ['/api/__sitemap__/urls'],
+    exclude: ['/admin/**', '/login', '/sign-up', '/forgot-password', '/restore-password'],
+  },
+
   i18n: {
+    // hreflang is intentionally absent: with `no_prefix` both locales share one
+    // URL, so there is no alternate href to point at. Switching to
+    // `prefix_except_default` would be a prerequisite.
     strategy: 'no_prefix',
     defaultLocale: 'uk',
     vueI18n: './i18n.config.ts',
@@ -85,6 +114,19 @@ export default defineNuxtConfig({
 
   // Session (nuxt-auth-utils): 1-day expiry + hardened cookie. Password from NUXT_SESSION_PASSWORD.
   runtimeConfig: {
+    // Image uploads. Local disk in dev; set NUXT_STORAGE_DRIVER=s3 in production,
+    // where the container filesystem is wiped on every redeploy.
+    storage: {
+      driver: 'local', // NUXT_STORAGE_DRIVER: 'local' | 's3'
+      uploadDir: '.data/uploads', // NUXT_STORAGE_UPLOAD_DIR
+      s3Endpoint: '', // NUXT_STORAGE_S3_ENDPOINT
+      s3Bucket: '', // NUXT_STORAGE_S3_BUCKET
+      s3Region: 'auto', // NUXT_STORAGE_S3_REGION
+      s3AccessKeyId: '', // NUXT_STORAGE_S3_ACCESS_KEY_ID
+      s3SecretAccessKey: '', // NUXT_STORAGE_S3_SECRET_ACCESS_KEY
+      s3PublicUrl: '', // NUXT_STORAGE_S3_PUBLIC_URL
+    },
+
     session: {
       // password is overridden at runtime by NUXT_SESSION_PASSWORD; '' is just the
       // typed default that enables that env override (SessionConfig requires it).

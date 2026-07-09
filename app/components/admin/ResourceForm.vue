@@ -88,6 +88,20 @@ function onSubmit() {
           :label="t(f.label)"
           :error="errors[f.name]"
         />
+        <AppFieldEditor
+          v-else-if="f.type === 'richtext'"
+          v-model="form[f.name]"
+          :name="f.name"
+          :label="t(f.label)"
+          :error="errors[f.name]"
+        />
+        <AppFieldImage
+          v-else-if="f.type === 'image'"
+          v-model="form[f.name]"
+          :name="f.name"
+          :label="t(f.label)"
+          :error="errors[f.name]"
+        />
         <AppFieldInput
           v-else-if="f.type === 'number'"
           v-model="form[f.name]"

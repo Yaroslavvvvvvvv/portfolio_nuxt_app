@@ -14,7 +14,7 @@ export default defineEventHandler(async (event) => {
 
   const user = await prisma.user.findUnique({ where: { email: String(email ?? '') } })
   if (!user || !verifySecret(String(password ?? ''), user.passwordHash)) {
-    registerFailure(key, WINDOW_MS) // only failed attempts count toward the limit
+    registerHit(key, WINDOW_MS) // only failed attempts count toward the limit
     throw createError({ statusCode: 401, statusMessage: 'server.invalidCredentials' })
   }
 

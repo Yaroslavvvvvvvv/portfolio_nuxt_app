@@ -17,7 +17,7 @@ export const teamResource: ResourceConfig = {
     { name: 'slug', label: 'fields.slug', type: 'text', help: 'form.slugHint' },
     { name: 'role', label: 'fields.role', type: 'text' },
     { name: 'bio', label: 'fields.bio', type: 'textarea' },
-    { name: 'imagePath', label: 'fields.photo', type: 'text' },
+    { name: 'imagePath', label: 'fields.photo', type: 'image' },
     { name: 'position', label: 'fields.position', type: 'number' },
     { name: 'isPublished', label: 'fields.isPublished', type: 'boolean' },
   ],

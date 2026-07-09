@@ -1,75 +1,54 @@
-# Nuxt Minimal Starter
+# Studio Site + Admin
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Сайт веб-студії: публічна SSR-частина (SEO) + власна адмін-панель (`/admin`, SPA).
+Nuxt 4 · Nitro · PostgreSQL + Prisma · PrimeVue · i18n (uk/en).
 
-## Setup
+- **[PROJECT.md](./PROJECT.md)** — архітектура, модель даних, роадмап.
+- **[DEPLOY.md](./DEPLOY.md)** — деплой у прод, SEO та аналітика.
 
-Make sure to install dependencies:
+## Вимоги
+
+- Node.js 20+
+- PostgreSQL 16 (локально: `brew services start postgresql@16`)
+
+## Запуск
 
 ```bash
-# npm
 npm install
 
-# pnpm
-pnpm install
+cp .env.example .env     # заповнити DATABASE_URL, NUXT_SESSION_PASSWORD, ADMIN_EMAIL, ADMIN_PASSWORD
 
-# yarn
-yarn install
+npm run db:migrate       # prisma migrate dev
+npm run db:seed          # адмін + демо-контент
 
-# bun
-bun install
+npm run dev              # → http://localhost:3000
 ```
 
-## Development Server
+- Публічний сайт — `http://localhost:3000/`
+- Адмінка — `http://localhost:3000/admin` (креденшли з `.env`)
 
-Start the development server on `http://localhost:3000`:
+## Скрипти
 
-```bash
-# npm
-npm run dev
+| Команда | Що робить |
+|---|---|
+| `npm run dev` | dev-сервер |
+| `npm run build` / `npm run preview` | прод-білд і локальний перегляд |
+| `npm test` | vitest |
+| `npm run db:migrate` | застосувати міграції (dev) |
+| `npm run db:seed` | сид: адмін + демо-контент |
+| `npm run db:studio` | Prisma Studio |
 
-# pnpm
-pnpm dev
+## Додати новий ресурс в адмінку
 
-# yarn
-yarn dev
+CRUD — config-driven, нових роутів і сторінок писати не треба:
 
-# bun
-bun run dev
-```
+1. Модель у `prisma/schema.prisma` + `npm run db:migrate`.
+2. Конфіг у `app/config/resources/<name>.ts` + рядок у `app/config/resources/index.ts`.
+3. Запис у `server/utils/resources.ts` (`crudRegistry`) і, якщо ресурс публічний, у `server/utils/publicResources.ts`.
 
-## Production
+Сайдбар, таблиця, форма і API-роути підхоплять його автоматично.
 
-Build the application for production:
+## Прод
 
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+`npm run build` → `node .output/server/index.mjs`.
+Міграції на релізі — `npx prisma migrate deploy` (не `migrate dev`). Деталі — у [DEPLOY.md](./DEPLOY.md).

@@ -1,4 +1,5 @@
 import type { ResourceConfig } from './types'
+import { seoFields } from './seo'
 
 export const pageResource: ResourceConfig = {
   name: 'pages',
@@ -14,7 +15,8 @@ export const pageResource: ResourceConfig = {
   fields: [
     { name: 'title', label: 'fields.title', type: 'text', required: true },
     { name: 'slug', label: 'fields.slug', type: 'text', help: 'form.slugHint' },
-    { name: 'content', label: 'fields.contentHtml', type: 'textarea' },
+    { name: 'content', label: 'fields.contentHtml', type: 'richtext' },
     { name: 'isPublished', label: 'fields.isPublished', type: 'boolean' },
+    ...seoFields,
   ],
 }

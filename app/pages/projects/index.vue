@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const { t } = useI18n()
-useSeoMeta({ title: () => t('projects.title') })
+usePageSeo(() => ({ title: t('projects.title'), description: t('meta.projects') }))
 const { data: projects } = await useFetch<any[]>('/api/content/projects')
 </script>
 

@@ -48,7 +48,12 @@
   "form": {
     "commaSeparated": "Comma-separated values",
     "slugHint": "Leave empty — generated from the title",
-    "iconHint": "PrimeIcon class, e.g. pi pi-compass"
+    "iconHint": "PrimeIcon class, e.g. pi pi-compass",
+    "metaTitleHint": "Leave empty — falls back to the record title",
+    "metaDescriptionHint": "Up to ~160 characters. Shown in Google results",
+    "ogImageHint": "Preview when shared on social networks. Empty — falls back to the main image",
+    "uploadImage": "Upload",
+    "removeImage": "Remove"
   },
   "validation": {
     "required": "This field is required",
@@ -91,9 +96,9 @@
     "slug": "Slug",
     "shortDescription": "Short description",
     "content": "Content",
-    "contentHtml": "Content (HTML)",
+    "contentHtml": "Content",
     "tags": "Tags",
-    "image": "Image (URL)",
+    "image": "Image",
     "isPublished": "Published",
     "question": "Question",
     "answer": "Answer",
@@ -105,9 +110,12 @@
     "role": "Role",
     "bio": "Bio",
     "icon": "Icon",
-    "photo": "Photo (URL)",
+    "photo": "Photo",
     "isRead": "Handled",
-    "createdAt": "Date"
+    "createdAt": "Date",
+    "metaTitle": "SEO: title",
+    "metaDescription": "SEO: description",
+    "ogImage": "SEO: social share image"
   },
   "resources": {
     "blog": {
@@ -222,15 +230,29 @@
   "server": {
     "invalidCredentials": "Invalid email or password",
     "tooManyAttempts": "Too many login attempts. Please try again later.",
+    "tooManyRequests": "Too many requests. Please try again later.",
     "invalidData": "Please check the form fields",
     "invalidEmail": "Invalid email address",
     "duplicate": "A record with these values already exists",
-    "notFound": "Record not found"
+    "notFound": "Record not found",
+    "noFile": "No file selected",
+    "invalidImage": "Unsupported format. Allowed: JPEG, PNG, WebP, GIF, AVIF",
+    "imageTooLarge": "File is too large (5 MB max)"
   },
   "about": {
     "title": "About us"
   },
   "faq": {
     "title": "FAQ"
+  },
+  "meta": {
+    "home": "A full-cycle studio: strategy, design and development of websites that bring in clients.",
+    "projects": "Selected studio cases: websites, landing pages and corporate platforms we have shipped.",
+    "services": "Studio services: design, development, support and growth of websites end to end.",
+    "team": "The people behind our projects: designers, developers and managers.",
+    "blog": "Articles on web development, design, and how we build websites.",
+    "faq": "Answers to the most common questions about timelines, pricing and our process.",
+    "contacts": "Get in touch with the studio: tell us about your project — we reply within a day.",
+    "about": "About the studio: what we do, what we believe in, and how we work."
   }
 }

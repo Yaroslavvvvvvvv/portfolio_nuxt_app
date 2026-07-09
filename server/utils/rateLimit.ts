@@ -22,8 +22,9 @@ export function isRateLimited(key: string, max: number, windowMs: number): boole
   return bucket.count >= max
 }
 
-// Count one failed attempt against the key.
-export function registerFailure(key: string, windowMs: number): void {
+// Count one attempt against the key. Callers decide what counts: login only
+// registers failures, public forms register every submission.
+export function registerHit(key: string, windowMs: number): void {
   const now = Date.now()
   sweep(now)
   const bucket = buckets.get(key)

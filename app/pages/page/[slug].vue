@@ -5,14 +5,18 @@ if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Not found' })
 }
 const html = computed(() => sanitizeHtml(page.value?.content))
-useSeoMeta({ title: () => page.value?.title })
+
+usePageSeo(() => ({
+  title: page.value?.metaTitle || page.value?.title,
+  description: page.value?.metaDescription,
+  image: page.value?.ogImage,
+  canonicalPath: DEDICATED_PAGE_ROUTES[String(route.params.slug)],
+}))
 </script>
 
 <template>
   <article v-if="page" class="pub-article">
     <h1 class="pub-article__title">{{ page.title }}</h1>
-    <ClientOnly>
-      <div class="pub-article__content" v-html="html" />
-    </ClientOnly>
+    <div class="pub-article__content" v-html="html" />
   </article>
 </template>

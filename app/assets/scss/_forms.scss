@@ -32,6 +32,56 @@
   gap: 4px;
 }
 
+.app-field__label {
+  font-size: 13px;
+  color: var(--color-muted);
+}
+
+.app-field--editor {
+  gap: 6px;
+
+  :deep(.p-editor-content .ql-editor),
+  .p-editor-content .ql-editor {
+    min-height: 240px;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+.app-field__image-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.app-field__preview {
+  width: 96px;
+  height: 96px;
+  flex: 0 0 auto;
+  object-fit: cover;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-surface);
+}
+
+.app-field__preview--empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-muted);
+  font-size: 24px;
+}
+
+.app-field__image-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
 .app-field-errors {
   display: flex;
   flex-direction: column;

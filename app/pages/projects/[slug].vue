@@ -1,11 +1,34 @@
 <script setup lang="ts">
 const route = useRoute()
+const site = useSiteConfig()
+const absoluteUrl = useAbsoluteUrl()
 const { data: project } = await useFetch<any>(`/api/content/projects/${route.params.slug}`)
 if (!project.value) {
   throw createError({ statusCode: 404, statusMessage: 'Not found' })
 }
 const html = computed(() => sanitizeHtml(project.value?.content))
-useSeoMeta({ title: () => project.value?.title })
+
+usePageSeo(() => ({
+  title: project.value?.metaTitle || project.value?.title,
+  description: project.value?.metaDescription || project.value?.description,
+  image: project.value?.ogImage || project.value?.imagePath,
+  type: 'article',
+}))
+
+useJsonLd(() => {
+  const p = project.value
+  if (!p) return null
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'CreativeWork',
+    name: p.metaTitle || p.title,
+    description: p.metaDescription || p.description || undefined,
+    image: absoluteUrl(p.ogImage || p.imagePath),
+    dateModified: p.updatedAt,
+    url: absoluteUrl(route.path),
+    creator: { '@type': 'Organization', name: site.name },
+  }
+})
 </script>
 
 <template>
@@ -20,8 +43,6 @@ useSeoMeta({ title: () => project.value?.title })
       :style="{ backgroundImage: `url(${project.imagePath})` }"
     />
     <p>{{ project.description }}</p>
-    <ClientOnly>
-      <div class="pub-article__content" v-html="html" />
-    </ClientOnly>
+    <div class="pub-article__content" v-html="html" />
   </article>
 </template>

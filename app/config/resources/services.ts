@@ -15,7 +15,7 @@ export const serviceResource: ResourceConfig = {
     { name: 'title', label: 'fields.title', type: 'text', required: true },
     { name: 'slug', label: 'fields.slug', type: 'text', help: 'form.slugHint' },
     { name: 'description', label: 'fields.shortDescription', type: 'textarea' },
-    { name: 'content', label: 'fields.contentHtml', type: 'textarea' },
+    { name: 'content', label: 'fields.contentHtml', type: 'richtext' },
     { name: 'icon', label: 'fields.icon', type: 'text', help: 'form.iconHint' },
     { name: 'position', label: 'fields.position', type: 'number' },
     { name: 'isPublished', label: 'fields.isPublished', type: 'boolean' },

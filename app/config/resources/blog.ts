@@ -1,4 +1,5 @@
 import type { ResourceConfig } from './types'
+import { seoFields } from './seo'
 
 export const blogResource: ResourceConfig = {
   name: 'blog',
@@ -15,9 +16,10 @@ export const blogResource: ResourceConfig = {
     { name: 'title', label: 'fields.title', type: 'text', required: true },
     { name: 'slug', label: 'fields.slug', type: 'text', help: 'form.slugHint' },
     { name: 'shortDescription', label: 'fields.shortDescription', type: 'textarea' },
-    { name: 'content', label: 'fields.contentHtml', type: 'textarea' },
+    { name: 'content', label: 'fields.contentHtml', type: 'richtext' },
     { name: 'tags', label: 'fields.tags', type: 'list' },
-    { name: 'imagePath', label: 'fields.image', type: 'text' },
+    { name: 'imagePath', label: 'fields.image', type: 'image' },
     { name: 'isPublished', label: 'fields.isPublished', type: 'boolean' },
+    ...seoFields,
   ],
 }

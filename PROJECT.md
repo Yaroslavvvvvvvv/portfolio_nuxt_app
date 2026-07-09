@@ -105,14 +105,14 @@ nuxt-admin-starter/
 ### 🔴 Must-have (без цього не продукт)
 - [x] **Feedback на дії** — Toast (стиль Complat) + ConfirmDialog замість нативного `confirm()`. ✓
 - [x] **Серверні помилки у формі** — ловимо (duplicate slug → 422) і показуємо. ✓
-- [ ] **Завантаження зображень** — upload + storage (замість URL-поля). Найважливіша фіча для контенту.
+- [x] **Завантаження зображень** — `AppFieldImage` + `POST /api/admin/upload`; драйвери `local` / `s3` (`server/utils/storage.ts`). Поле лишається текстовим, тож старі зовнішні URL працюють. ✓
 - [x] **Дашборд** — KPI-лічильники по ресурсах (chart.js у проєкті, графіки — за потреби). ✓
 
 ### 🟡 Should-have (робить продукт «дорослим»)
-- [ ] **Rich-text редактор** для HTML-контенту (blog/project/page).
+- [x] **Rich-text редактор** — PrimeVue Editor (Quill) у `AppFieldEditor`; картинки з тулбару та з буфера завантажуються в сховище, а не вшиваються як base64. Allowlist санітайзера розширено (img/blockquote/pre/code/заголовки); `iframe` заборонено свідомо. ✓
 - [ ] **Полірування таблиці** — бейджі статусу, кращі порожні стани (колонка дати вже є).
 - [x] **Валідація за правилами** — yup-схеми (email/required), реактивно, як Complat. ✓
-- [ ] **🔍 SEO** — див. окремий блок нижче (критично важливе).
+- [x] **🔍 SEO** — фундамент закрито; лишились продуктивність і BreadcrumbList (див. блок нижче). ✓
 
 ### 📝 Кожен блок → в адмінку (систематичний прохід — НАСТУПНА ВЕЛИКА ФАЗА)
 Пройти **блок за блоком по кожній сторінці** й зробити кожен керованим через адмінку (щоб клієнт міняв усе сам, без розробника). Кандидати із зараз захардкодженого:
@@ -120,7 +120,7 @@ nuxt-admin-starter/
 - **Філософія** — 4 принципи → ресурс `principles`
 - **CTA-секція** «Готові почати?»
 - **Контактні дані** (адреса / телефон / email)
-- **SEO-мета** сторінок (metaTitle / metaDescription)
+- ~~**SEO-мета** сторінок (metaTitle / metaDescription)~~ — ✓ зроблено (поля в адмінці для blog/projects/pages)
 
 Дрібні тексти (hero / CTA / контакти) → узагальнений **key-value ресурс `settings`/`variables`**, щоб не плодити окремі моделі під кожен рядок.
 
@@ -135,16 +135,21 @@ nuxt-admin-starter/
 
 ## 🔍 SEO (окремий важливий блок)
 
-Публічна частина вже **SSR** — це база для SEO. Далі треба:
+Публічна частина вже **SSR** — це база для SEO.
 
-- [ ] **Per-page meta** через `useSeoMeta` (title/description на кожен роут + динамічні для проектів/статей).
-- [ ] **Open Graph + Twitter cards** (превʼю в соцмережах).
-- [ ] **sitemap.xml** (динамічний, з усіх опублікованих сторінок/проектів/статей) — модуль `@nuxtjs/sitemap`.
-- [ ] **robots.txt** — модуль `@nuxtjs/robots`.
-- [ ] **Canonical URL** + **hreflang** (uk/en) для мультимовності.
-- [ ] **Structured data (JSON-LD)** — Organization, Article, BreadcrumbList.
+- [x] **Тіло статей у SSR-HTML** — санітизація ізоморфна (`isomorphic-dompurify`), контент рендериться на сервері. ✓
+- [x] **Per-page meta** — композабл `usePageSeo` (`app/composables/useSeo.ts`) на всіх публічних роутах. ✓
+- [x] **Open Graph + Twitter cards** — там же; `og:image` абсолютизується. ✓
+- [x] **sitemap.xml** — `@nuxtjs/sitemap` + динамічне джерело `server/api/__sitemap__/urls.ts` (лише `isPublished`). ✓
+- [x] **robots.txt** — `@nuxtjs/robots` (`/admin`, `/api/` закриті; auth-заглушки `noindex`). ✓
+- [x] **Canonical URL** — на кожній сторінці; `/page/about-page` каноніклиться на `/about`. ✓
+- [x] **Structured data (JSON-LD)** — Organization (головна), Article (стаття), CreativeWork (кейс). ✓
+- [x] **SEO-поля в адмінці** — `metaTitle` / `metaDescription` / `ogImage` на blog, projects, pages. ✓
+- [ ] **hreflang** — ЗАБЛОКОВАНО: при `strategy: 'no_prefix'` обидві локалі живуть на одній URL, альтернативи нема на що вказати. Потрібен перехід на `prefix_except_default`.
+- [ ] **BreadcrumbList** (JSON-LD) — не зроблено.
 - [ ] **Продуктивність** (Core Web Vitals) — lazy-load зображень, оптимізація.
-- [ ] **SEO-поля в адмінці** — metaTitle/metaDescription на ресурсах (щоб клієнт керував SEO сам).
+
+**Змінна оточення:** `NUXT_PUBLIC_SITE_URL` — реальний домен у проді (без слеша в кінці). Без неї canonical/og/sitemap вкажуть на `http://localhost:3000`.
 
 ---
 

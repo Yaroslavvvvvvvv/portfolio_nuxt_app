@@ -26,6 +26,9 @@ model Blog {
   tags             String[] @default([])
   imagePath        String?
   isPublished      Boolean  @default(false)
+  metaTitle        String?
+  metaDescription  String?
+  ogImage          String?
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
 }
@@ -41,19 +44,22 @@ model Faq {
 }
 
 model Project {
-  id          Int      @id @default(autoincrement())
-  title       String
-  slug        String   @unique
-  client      String?
-  type        String?
-  year        Int?
-  description String?
-  content     String?
-  imagePath   String?
-  position    Int      @default(0)
-  isPublished Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id              Int      @id @default(autoincrement())
+  title           String
+  slug            String   @unique
+  client          String?
+  type            String?
+  year            Int?
+  description     String?
+  content         String?
+  imagePath       String?
+  position        Int      @default(0)
+  isPublished     Boolean  @default(true)
+  metaTitle       String?
+  metaDescription String?
+  ogImage         String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }
 
 model Service {
@@ -93,11 +99,14 @@ model ContactRequest {
 }
 
 model StaticPage {
-  id          Int      @id @default(autoincrement())
-  title       String
-  slug        String   @unique
-  content     String?
-  isPublished Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id              Int      @id @default(autoincrement())
+  title           String
+  slug            String   @unique
+  content         String?
+  isPublished     Boolean  @default(true)
+  metaTitle       String?
+  metaDescription String?
+  ogImage         String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }

@@ -20,6 +20,10 @@ function slugFrom(source: string) {
 
 const withTitleSlug = slugFrom('title')
 
+// Per-page SEO overrides, editable in the admin for every resource that has a
+// public detail route. Empty values fall back to the record's own title/description.
+const SEO_FIELDS = ['metaTitle', 'metaDescription', 'ogImage']
+
 const titleRequired = yup.object({ title: yup.string().trim().required() })
 
 // Central registry: resource name -> how the generic CRUD engine talks to Prisma.
@@ -27,7 +31,7 @@ export const crudRegistry: Record<string, CrudConfig> = {
   blog: {
     delegate: prisma.blog,
     searchable: ['title', 'slug'],
-    fillable: ['title', 'slug', 'shortDescription', 'content', 'tags', 'imagePath', 'isPublished'],
+    fillable: ['title', 'slug', 'shortDescription', 'content', 'tags', 'imagePath', 'isPublished', ...SEO_FIELDS],
     defaultSort: { field: 'createdAt', order: 'desc' },
     transform: withTitleSlug,
     schema: titleRequired,
@@ -35,7 +39,7 @@ export const crudRegistry: Record<string, CrudConfig> = {
   projects: {
     delegate: prisma.project,
     searchable: ['title', 'slug', 'client'],
-    fillable: ['title', 'slug', 'client', 'type', 'year', 'description', 'content', 'imagePath', 'position', 'isPublished'],
+    fillable: ['title', 'slug', 'client', 'type', 'year', 'description', 'content', 'imagePath', 'position', 'isPublished', ...SEO_FIELDS],
     defaultSort: { field: 'position', order: 'asc' },
     transform: withTitleSlug,
     schema: titleRequired,
@@ -69,7 +73,7 @@ export const crudRegistry: Record<string, CrudConfig> = {
   pages: {
     delegate: prisma.staticPage,
     searchable: ['title', 'slug'],
-    fillable: ['title', 'slug', 'content', 'isPublished'],
+    fillable: ['title', 'slug', 'content', 'isPublished', ...SEO_FIELDS],
     defaultSort: { field: 'createdAt', order: 'desc' },
     transform: withTitleSlug,
     schema: titleRequired,

@@ -1,6 +1,16 @@
 <script setup lang="ts">
 const { t } = useI18n()
-useSeoMeta({ title: () => t('home.metaTitle') })
+const site = useSiteConfig()
+
+usePageSeo(() => ({ title: t('home.metaTitle'), description: t('meta.home') }))
+
+useJsonLd(() => ({
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: site.name,
+  url: site.url,
+  description: t('meta.home'),
+}))
 const { data: services } = await useFetch<any[]>('/api/content/services')
 const { data: projects } = await useFetch<any[]>('/api/content/projects')
 const { data: faq } = await useFetch<any[]>('/api/content/faq')
