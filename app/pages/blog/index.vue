@@ -5,7 +5,7 @@ const { data: blog } = await useFetch<any[]>('/api/content/blog')
 </script>
 
 <template>
-  <section class="pub-section app-container">
+  <section class="pub-section">
     <div class="pub-section__head"><h2>{{ t('blog.title') }}</h2></div>
 
     <div v-if="blog?.length" class="pub-grid">

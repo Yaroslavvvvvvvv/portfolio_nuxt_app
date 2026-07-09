@@ -5,7 +5,7 @@ const { data: team } = await useFetch<any[]>('/api/content/team')
 </script>
 
 <template>
-  <section class="pub-section app-container">
+  <section class="pub-section">
     <div class="pub-section__head"><h2>{{ t('team.title') }}</h2></div>
     <p class="pub-subtitle">{{ t('team.subtitle') }}</p>
 

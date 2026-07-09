@@ -5,7 +5,7 @@ const { data: projects } = await useFetch<any[]>('/api/content/projects')
 </script>
 
 <template>
-  <section class="pub-section app-container">
+  <section class="pub-section">
     <div class="pub-section__head"><h2>{{ t('projects.title') }}</h2></div>
     <p class="pub-subtitle">{{ t('projects.subtitle') }}</p>
 

@@ -25,12 +25,12 @@ const principles = ['craft', 'speed', 'honesty', 'boldness']
 
 <template>
   <div>
-    <section class="pub-hero app-container">
+    <section class="pub-hero">
       <h1 class="pub-hero__title">{{ t('home.heroTitle') }}</h1>
       <p class="pub-hero__text">{{ t('home.heroText') }}</p>
     </section>
 
-    <section class="pub-section app-container">
+    <section class="pub-section">
       <div class="pub-section__head"><h2>{{ t('home.philosophyTitle') }}</h2></div>
       <div class="pub-principles">
         <div v-for="(p, i) in principles" :key="p" class="pub-principle">
@@ -41,7 +41,7 @@ const principles = ['craft', 'speed', 'honesty', 'boldness']
       </div>
     </section>
 
-    <section class="pub-section app-container">
+    <section class="pub-section">
       <div class="pub-section__head">
         <h2>{{ t('home.servicesTitle') }}</h2>
         <NuxtLink to="/services" class="field-link">{{ t('action.allServices') }} →</NuxtLink>
@@ -55,7 +55,7 @@ const principles = ['craft', 'speed', 'honesty', 'boldness']
       </div>
     </section>
 
-    <section class="pub-section app-container">
+    <section class="pub-section">
       <div class="pub-section__head">
         <h2>{{ t('home.worksTitle') }}</h2>
         <NuxtLink to="/projects" class="field-link">{{ t('action.allProjects') }} →</NuxtLink>
@@ -71,7 +71,7 @@ const principles = ['craft', 'speed', 'honesty', 'boldness']
       </div>
     </section>
 
-    <section class="pub-section app-container">
+    <section class="pub-section">
       <div class="pub-section__head">
         <h2>{{ t('home.faqTitle') }}</h2>
         <NuxtLink to="/faq" class="field-link">FAQ →</NuxtLink>
@@ -84,7 +84,7 @@ const principles = ['craft', 'speed', 'honesty', 'boldness']
       </Accordion>
     </section>
 
-    <section class="pub-section app-container">
+    <section class="pub-section">
       <div class="pub-section__head">
         <h2>{{ t('home.blogTitle') }}</h2>
         <NuxtLink to="/blog" class="field-link">{{ t('action.allPosts') }} →</NuxtLink>
@@ -100,7 +100,7 @@ const principles = ['craft', 'speed', 'honesty', 'boldness']
       </div>
     </section>
 
-    <section class="app-container">
+    <section>
       <div class="pub-cta">
         <h2 class="pub-cta__title">{{ t('home.ctaTitle') }}</h2>
         <p class="pub-cta__text">{{ t('home.ctaText') }}</p>

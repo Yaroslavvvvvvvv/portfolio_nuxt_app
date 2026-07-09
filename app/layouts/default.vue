@@ -4,7 +4,11 @@
       <PublicHeader />
     </div>
     <div class="app-wrapper__content">
-      <slot />
+      <!-- Single place that bounds public page width. Pages must not re-apply
+           .app-container; narrower shells (.pub-article) just nest inside. -->
+      <div class="app-container">
+        <slot />
+      </div>
     </div>
     <div class="app-wrapper__bottom">
       <PublicFooter />

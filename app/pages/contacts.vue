@@ -55,7 +55,7 @@ async function submit() {
 </script>
 
 <template>
-  <section class="pub-section app-container">
+  <section class="pub-section">
     <div class="pub-contacts">
       <div class="pub-contacts__info">
         <h1>{{ t('contacts.title') }}</h1>

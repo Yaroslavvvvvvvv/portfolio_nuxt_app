@@ -278,7 +278,8 @@
   width: 100%;
   max-width: 760px;
   margin: 0 auto;
-  padding: 2.5rem 1rem 1rem;
+  // Horizontal padding comes from the layout's .app-container.
+  padding: 2.5rem 0 1rem;
 
   &__title {
     font-family: $f-family-secondary;
@@ -317,7 +318,8 @@
   width: 100%;
   max-width: 760px;
   margin: 0 auto;
-  padding: 2.5rem 1rem;
+  // Horizontal padding comes from the layout's .app-container.
+  padding: 2.5rem 0;
 }
 
 /* ---------- BLOCK: pub-product ---------- */
