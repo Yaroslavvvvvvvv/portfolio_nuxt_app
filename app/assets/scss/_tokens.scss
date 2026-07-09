@@ -48,7 +48,10 @@
   --color-bg: #1c1d27;
   --color-bg-soft: #23242f;
   --color-surface: #282a37;
-  --color-surface-base: #1f202b;
+  /* Matches --color-bg (as in the light theme): the admin shell is capped at
+     1200px, so a sidebar/topbar tinted differently from the page would draw a
+     visible seam down the edge of the shell. */
+  --color-surface-base: #1c1d27;
 
   --color-text: #f1f2f5;
   --color-text-secondary: #b6bcc6;
