@@ -12,7 +12,9 @@
     "team": "Команда",
     "blog": "Блог",
     "contacts": "Контакти",
-    "dashboard": "Дашборд"
+    "dashboard": "Дашборд",
+    "openMenu": "Відкрити меню",
+    "closeMenu": "Закрити меню"
   },
   "action": {
     "save": "Зберегти",

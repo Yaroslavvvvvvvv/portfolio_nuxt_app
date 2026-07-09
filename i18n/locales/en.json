@@ -12,7 +12,9 @@
     "team": "Team",
     "blog": "Blog",
     "contacts": "Contacts",
-    "dashboard": "Dashboard"
+    "dashboard": "Dashboard",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
   },
   "action": {
     "save": "Save",

@@ -1,6 +1,8 @@
 @use 'vars' as *;
 @use 'mixins' as *;
 
+$header-height: 68px;
+
 /* ---------- BLOCK: pub-header ---------- */
 .pub-header {
   position: relative;
@@ -13,7 +15,7 @@
     display: flex;
     align-items: center;
     gap: 1.5rem;
-    height: 68px;
+    height: $header-height;
   }
 
   &__brand {
@@ -40,24 +42,60 @@
       }
     }
 
+    // Mobile: a full-height panel under the header, faded in rather than
+    // toggled with `display` (which cannot animate). It stays in the layout so
+    // the transition runs both ways; pointer-events keep it inert when closed.
     @include breakpoint('M768') {
-      display: none;
-      position: absolute;
-      top: 100%;
+      position: fixed;
+      top: 0;
       left: 0;
-      right: 0;
+      width: 100%;
+      margin-top: $header-height;
+      height: calc(100dvh - #{$header-height});
+      z-index: 30;
       flex-direction: column;
-      gap: 0.25rem;
-      background: var(--color-surface);
-      border-bottom: 1px solid var(--color-border);
-      padding: 1rem 16px;
+      align-items: stretch;
+      gap: 0;
       margin-right: 0;
+      padding: 0.5rem 16px calc(1.5rem + env(safe-area-inset-bottom));
+      background: var(--color-bg);
+      overflow-y: auto;
+      opacity: 0;
+      pointer-events: none;
+      // visibility, not just opacity: otherwise the hidden links stay in the
+      // tab order and keyboard focus disappears into an invisible panel.
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
     }
 
     &--open {
       @include breakpoint('M768') {
-        display: flex;
+        opacity: 1;
+        pointer-events: auto;
+        visibility: visible;
       }
+    }
+  }
+
+  &__nav-link,
+  &__nav-admin {
+    @include breakpoint('M768') {
+      display: flex;
+      align-items: center;
+      min-height: 56px;
+      font-size: 1.05rem;
+      border-bottom: 1px solid var(--color-border);
+    }
+  }
+
+  // The nav carries its own admin entry on mobile, where __admin is hidden.
+  // Scoped under __nav to outrank the `.pub-header__nav a` colour rule.
+  &__nav &__nav-admin {
+    display: none;
+
+    @include breakpoint('M768') {
+      display: flex;
+      color: var(--color-link);
     }
   }
 
@@ -73,6 +111,7 @@
 
   &__burger {
     display: none;
+    position: relative;
     align-items: center;
     justify-content: center;
     width: 38px;
@@ -85,6 +124,20 @@
 
     @include breakpoint('M768') {
       display: inline-flex;
+    }
+  }
+
+  // Bars and times sit on top of each other and cross-fade, so the button
+  // never reflows while switching state.
+  &__burger-icon {
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+
+    &--visible {
+      opacity: 1;
+      visibility: visible;
     }
   }
 

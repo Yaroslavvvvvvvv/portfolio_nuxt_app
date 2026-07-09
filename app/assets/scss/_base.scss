@@ -10,6 +10,13 @@ html {
   line-height: 24px;
 }
 
+/* Scroll lock for full-screen overlays (mobile menu, modals).
+   Toggled from the app store via SET_FIXED_STATUS. */
+html.app-fix,
+html.app-fix body {
+  overflow: hidden;
+}
+
 body {
   margin: 0;
   font-family: $f-family;
