@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const { t } = useI18n()
+useSeoMeta({ title: () => t('about.title') })
 const { data: page } = await useFetch<any>('/api/content/pages/about-page')
 const html = computed(() => sanitizeHtml(page.value?.content))
 </script>

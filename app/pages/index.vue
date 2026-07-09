@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const { t } = useI18n()
+useSeoMeta({ title: () => t('home.metaTitle') })
 const { data: services } = await useFetch<any[]>('/api/content/services')
 const { data: projects } = await useFetch<any[]>('/api/content/projects')
 const { data: faq } = await useFetch<any[]>('/api/content/faq')

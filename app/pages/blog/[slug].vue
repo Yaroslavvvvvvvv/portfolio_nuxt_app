@@ -5,6 +5,10 @@ if (!article.value) {
   throw createError({ statusCode: 404, statusMessage: 'Not found' })
 }
 const html = computed(() => sanitizeHtml(article.value?.content))
+useSeoMeta({
+  title: () => article.value?.title,
+  description: () => article.value?.shortDescription,
+})
 </script>
 
 <template>

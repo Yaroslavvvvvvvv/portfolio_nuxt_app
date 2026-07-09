@@ -5,6 +5,7 @@ if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Not found' })
 }
 const html = computed(() => sanitizeHtml(page.value?.content))
+useSeoMeta({ title: () => page.value?.title })
 </script>
 
 <template>

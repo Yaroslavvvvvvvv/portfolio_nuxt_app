@@ -1,6 +1,7 @@
 <script setup lang="ts">
 definePageMeta({ layout: 'auth' })
 const { t } = useI18n()
+useSeoMeta({ title: () => t('auth.loginTitle') })
 const email = ref('')
 const password = ref('')
 const done = ref(false)

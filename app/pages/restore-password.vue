@@ -1,6 +1,7 @@
 <script setup lang="ts">
 definePageMeta({ layout: 'auth' })
 const { t } = useI18n()
+useSeoMeta({ title: () => t('auth.restoreTitle') })
 const form = reactive({ password: '', confirm: '' })
 const done = ref(false)
 </script>

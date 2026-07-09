@@ -1,22 +1,50 @@
 {
-  "themeToggle": { "aria": "Toggle light / dark theme" },
-  "langSwitch": { "aria": "Change language" },
+  "themeToggle": {
+    "aria": "Toggle light / dark theme"
+  },
+  "langSwitch": {
+    "aria": "Change language"
+  },
   "nav": {
-    "home": "Home", "projects": "Projects", "services": "Services", "team": "Team",
-    "blog": "Blog", "contacts": "Contacts", "dashboard": "Dashboard"
+    "home": "Home",
+    "projects": "Projects",
+    "services": "Services",
+    "team": "Team",
+    "blog": "Blog",
+    "contacts": "Contacts",
+    "dashboard": "Dashboard"
   },
   "action": {
-    "save": "Save", "update": "Update", "cancel": "Cancel", "add": "Add",
-    "edit": "Edit", "delete": "Delete", "search": "Search", "login": "Log in",
-    "logout": "Log out", "readMore": "Read more", "send": "Send", "contact": "Get in touch",
-    "viewCase": "View case", "allProjects": "All projects", "allPosts": "All posts", "allServices": "All services"
+    "save": "Save",
+    "update": "Update",
+    "cancel": "Cancel",
+    "add": "Add",
+    "edit": "Edit",
+    "delete": "Delete",
+    "search": "Search",
+    "login": "Log in",
+    "logout": "Log out",
+    "readMore": "Read more",
+    "send": "Send",
+    "contact": "Get in touch",
+    "viewCase": "View case",
+    "allProjects": "All projects",
+    "allPosts": "All posts",
+    "allServices": "All services"
   },
   "admin": {
-    "title": "Admin panel", "welcome": "Welcome", "loginTitle": "Admin panel login",
-    "loginError": "Invalid email or password", "pickResource": "Pick a resource in the menu to manage content.",
-    "createTitle": "New: {label}", "editTitle": "Edit: {label}"
+    "title": "Admin panel",
+    "welcome": "Welcome",
+    "loginTitle": "Admin panel login",
+    "loginError": "Invalid email or password",
+    "pickResource": "Pick a resource in the menu to manage content.",
+    "createTitle": "New: {label}",
+    "editTitle": "Edit: {label}"
   },
-  "table": { "actions": "Actions", "confirmDelete": "Delete this record?" },
+  "table": {
+    "actions": "Actions",
+    "confirmDelete": "Delete this record?"
+  },
   "form": {
     "commaSeparated": "Comma-separated values",
     "slugHint": "Leave empty — generated from the title",
@@ -33,63 +61,164 @@
     "passwordsMatch": "Passwords must match",
     "nameFormat": "Invalid name format"
   },
-  "common": { "empty": "No records.", "loading": "Loading…" },
-  "toast": { "created": "Created", "updated": "Updated", "deleted": "Deleted", "error": "Something went wrong", "loggedIn": "Signed in", "loggedOut": "Signed out" },
-  "confirm": { "deleteTitle": "Delete record?", "deleteText": "This action cannot be undone.", "accept": "Delete", "reject": "Cancel" },
-  "dashboard": { "manage": "Manage", "contentOverview": "Content overview", "published": "Published", "draft": "Drafts" },
+  "common": {
+    "empty": "No records.",
+    "loading": "Loading…"
+  },
+  "toast": {
+    "created": "Created",
+    "updated": "Updated",
+    "deleted": "Deleted",
+    "error": "Something went wrong",
+    "loggedIn": "Signed in",
+    "loggedOut": "Signed out"
+  },
+  "confirm": {
+    "deleteTitle": "Delete record?",
+    "deleteText": "This action cannot be undone.",
+    "accept": "Delete",
+    "reject": "Cancel"
+  },
+  "dashboard": {
+    "manage": "Manage",
+    "contentOverview": "Content overview",
+    "published": "Published",
+    "draft": "Drafts"
+  },
   "fields": {
-    "id": "ID", "title": "Title", "slug": "Slug", "shortDescription": "Short description",
-    "content": "Content", "contentHtml": "Content (HTML)", "tags": "Tags", "image": "Image (URL)",
-    "isPublished": "Published", "question": "Question", "answer": "Answer", "position": "Position",
-    "client": "Client", "type": "Type", "year": "Year", "name": "Name", "role": "Role",
-    "bio": "Bio", "icon": "Icon", "photo": "Photo (URL)",
-    "isRead": "Handled", "createdAt": "Date"
+    "id": "ID",
+    "title": "Title",
+    "slug": "Slug",
+    "shortDescription": "Short description",
+    "content": "Content",
+    "contentHtml": "Content (HTML)",
+    "tags": "Tags",
+    "image": "Image (URL)",
+    "isPublished": "Published",
+    "question": "Question",
+    "answer": "Answer",
+    "position": "Position",
+    "client": "Client",
+    "type": "Type",
+    "year": "Year",
+    "name": "Name",
+    "role": "Role",
+    "bio": "Bio",
+    "icon": "Icon",
+    "photo": "Photo (URL)",
+    "isRead": "Handled",
+    "createdAt": "Date"
   },
   "resources": {
-    "blog": { "one": "Post", "many": "Blog" },
-    "projects": { "one": "Project", "many": "Projects" },
-    "services": { "one": "Service", "many": "Services" },
-    "team": { "one": "Member", "many": "Team" },
-    "faq": { "one": "Question", "many": "FAQ" },
-    "pages": { "one": "Page", "many": "Static pages" },
-    "requests": { "one": "Request", "many": "Requests" }
+    "blog": {
+      "one": "Post",
+      "many": "Blog"
+    },
+    "projects": {
+      "one": "Project",
+      "many": "Projects"
+    },
+    "services": {
+      "one": "Service",
+      "many": "Services"
+    },
+    "team": {
+      "one": "Member",
+      "many": "Team"
+    },
+    "faq": {
+      "one": "Question",
+      "many": "FAQ"
+    },
+    "pages": {
+      "one": "Page",
+      "many": "Static pages"
+    },
+    "requests": {
+      "one": "Request",
+      "many": "Requests"
+    }
   },
   "home": {
     "heroTitle": "Full-cycle websites, built with obsession",
     "heroText": "Strategy, design and code — a studio that ships polished products, fast.",
     "philosophyTitle": "Our philosophy",
     "principles": {
-      "craftTitle": "Craftsmanship", "craftText": "Every detail matters — from pixel to pipeline.",
-      "speedTitle": "Speed", "speedText": "Weeks, not months. Momentum wins.",
-      "honestyTitle": "Honesty", "honestyText": "Transparent pricing and a clear scope.",
-      "boldnessTitle": "Boldness", "boldnessText": "We push ideas that stand out."
+      "craftTitle": "Craftsmanship",
+      "craftText": "Every detail matters — from pixel to pipeline.",
+      "speedTitle": "Speed",
+      "speedText": "Weeks, not months. Momentum wins.",
+      "honestyTitle": "Honesty",
+      "honestyText": "Transparent pricing and a clear scope.",
+      "boldnessTitle": "Boldness",
+      "boldnessText": "We push ideas that stand out."
     },
-    "servicesTitle": "What we do", "servicesText": "From the first idea to a growing product.",
-    "worksTitle": "Selected work", "worksText": "Recent projects we are proud of.",
-    "faqTitle": "Questions", "blogTitle": "From the journal",
-    "ctaTitle": "Ready to start?", "ctaText": "Tell us about your project — we reply within a day."
+    "servicesTitle": "What we do",
+    "servicesText": "From the first idea to a growing product.",
+    "worksTitle": "Selected work",
+    "worksText": "Recent projects we are proud of.",
+    "faqTitle": "Questions",
+    "blogTitle": "From the journal",
+    "ctaTitle": "Ready to start?",
+    "ctaText": "Tell us about your project — we reply within a day.",
+    "metaTitle": "We build websites that sell"
   },
-  "projects": { "title": "Projects", "subtitle": "Selected work, 2024–2025.", "empty": "No projects yet." },
-  "servicesPage": { "title": "Services", "subtitle": "Full-cycle web, end to end.", "empty": "No services yet." },
-  "team": { "title": "Team", "subtitle": "The people behind the work.", "empty": "No team members yet." },
-  "blog": { "title": "Blog", "empty": "No posts yet." },
+  "projects": {
+    "title": "Projects",
+    "subtitle": "Selected work, 2024–2025.",
+    "empty": "No projects yet."
+  },
+  "servicesPage": {
+    "title": "Services",
+    "subtitle": "Full-cycle web, end to end.",
+    "empty": "No services yet."
+  },
+  "team": {
+    "title": "Team",
+    "subtitle": "The people behind the work.",
+    "empty": "No team members yet."
+  },
+  "blog": {
+    "title": "Blog",
+    "empty": "No posts yet."
+  },
   "public": {
     "heroText": "Public pages, a real admin panel and dark mode — all in one Nuxt project.",
-    "about": "About", "toAdmin": "Admin", "faqTitle": "Frequently asked questions"
+    "about": "About",
+    "toAdmin": "Admin",
+    "faqTitle": "Frequently asked questions"
   },
   "contacts": {
-    "title": "Contacts", "address": "Address", "phone": "Phone", "emailLabel": "Email",
-    "formTitle": "Send us a message", "name": "Name", "message": "Message",
+    "title": "Contacts",
+    "address": "Address",
+    "phone": "Phone",
+    "emailLabel": "Email",
+    "formTitle": "Send us a message",
+    "name": "Name",
+    "message": "Message",
     "sent": "Thanks! We'll get back to you soon."
   },
   "auth": {
-    "loginTitle": "Log in", "signupTitle": "Create account", "forgotTitle": "Reset password",
-    "restoreTitle": "Set a new password", "email": "Email", "password": "Password",
-    "name": "Name", "confirmPassword": "Confirm password", "haveAccount": "Already have an account?",
-    "noAccount": "No account yet?", "forgot": "Forgot password?", "submit": "Continue",
+    "loginTitle": "Log in",
+    "signupTitle": "Create account",
+    "forgotTitle": "Reset password",
+    "restoreTitle": "Set a new password",
+    "email": "Email",
+    "password": "Password",
+    "name": "Name",
+    "confirmPassword": "Confirm password",
+    "haveAccount": "Already have an account?",
+    "noAccount": "No account yet?",
+    "forgot": "Forgot password?",
+    "submit": "Continue",
     "stubNote": "Public authentication is a UI stub in this starter (no user backend yet)."
   },
-  "error": { "notFound": "Page not found", "serverError": "Something went wrong", "backHome": "Back to home", "resourceNotFound": "Resource not found" },
+  "error": {
+    "notFound": "Page not found",
+    "serverError": "Something went wrong",
+    "backHome": "Back to home",
+    "resourceNotFound": "Resource not found"
+  },
   "server": {
     "invalidCredentials": "Invalid email or password",
     "tooManyAttempts": "Too many login attempts. Please try again later.",
@@ -97,5 +226,11 @@
     "invalidEmail": "Invalid email address",
     "duplicate": "A record with these values already exists",
     "notFound": "Record not found"
+  },
+  "about": {
+    "title": "About us"
+  },
+  "faq": {
+    "title": "FAQ"
   }
 }
