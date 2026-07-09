@@ -1,0 +1,110 @@
+/* Toast (ported from Complat @prime/_toast.scss) */
+.p-toast.p-toast-top-right {
+  right: 16px !important;
+  top: 16px !important;
+}
+
+.p-toast--admin.p-toast-top-right {
+  top: calc(88px + 8px) !important;
+}
+
+.p-toast {
+  width: 300px !important;
+
+  --p-toast-warn-color: var(--color-text);
+  --p-toast-warn-background: var(--color-surface);
+  --p-toast-warn-border-color: var(--color-warning);
+
+  --p-toast-info-color: var(--color-text);
+  --p-toast-info-background: var(--color-surface);
+  --p-toast-info-border-color: var(--color-info);
+
+  --p-toast-success-color: var(--color-text);
+  --p-toast-success-background: var(--color-surface);
+  --p-toast-success-detail-color: var(--color-text-secondary);
+  --p-toast-success-border-color: var(--color-success);
+  --p-toast-success-shadow: 0 4px 16px rgba(27, 47, 71, 0.12);
+
+  --p-toast-error-color: var(--color-text);
+  --p-toast-error-background: var(--color-surface);
+  --p-toast-error-detail-color: var(--color-text-secondary);
+  --p-toast-error-border-color: var(--color-error);
+  --p-toast-error-shadow: 0 4px 16px rgba(27, 47, 71, 0.12);
+}
+
+.p-toast-message {
+  margin-bottom: 8px;
+}
+
+.p-toast-message-content {
+  padding: 10px 14px;
+}
+
+.p-toast-message-text {
+  gap: 2px;
+}
+
+.p-toast-summary {
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.p-toast-detail {
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.p-toast-close-button {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+}
+
+/* Global loader (ported from Complat AppMainLoader) */
+.app-main-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+
+  &--active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 72px;
+    height: 72px;
+    border-radius: 20px;
+    background: var(--color-primary);
+    color: #fff;
+    font-size: 2rem;
+    animation: app-loader-pulse 1.4s ease-in-out infinite;
+  }
+}
+
+.app-theme--dark .app-main-loader__logo {
+  background: #d7edff;
+  color: #171821;
+}
+
+@keyframes app-loader-pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(0.92);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

@@ -1,0 +1,71 @@
+/* Theme tokens — CSS custom properties for light & dark */
+:root,
+.app-theme--light {
+  --color-primary: #1b2f47;
+  --color-primary-light: #7fb2ee;
+  --color-accent: #8e3433;
+  --color-accent-soft: #8e34331f;
+  --color-link: #2aabee;
+
+  --color-bg: #ffffff;
+  --color-bg-soft: #fbfbfc;
+  --color-surface: #ffffff;
+  --color-surface-base: #ffffff;
+
+  --color-text: #262626;
+  --color-text-secondary: #575757;
+  --color-placeholder: #a0a0a0;
+  --color-border: #e2e5e8;
+  --color-border-soft: rgba(0, 0, 0, 0.05);
+  --color-muted: #8a96a3;
+  --color-primary-soft: rgba(27, 47, 71, 0.08);
+
+  --color-error: #d20000;
+  --color-info: #2196f3;
+  --color-success: #3bdc42;
+  --color-warning: #ffc107;
+
+  --color-dash-border: #e9ebf0;
+  --color-dash-link-text: #1f2633;
+  --color-dash-link-icon: #bbc2d0;
+  --color-dash-link-icon-active: #2b3f6c;
+  --color-dash-link-active-bg: #eef4fd;
+  --color-dash-section-bg: #f7f8fa;
+
+  --color-brand-contrast: #ffffff;
+  --color-overlay: rgba(0, 0, 0, 0.4);
+  --color-toggle-track: #dfe3e8;
+}
+
+.app-theme--dark {
+  --color-primary: #1b2f47;
+  /* brighter semantic variants for contrast on dark surfaces */
+  --color-accent: #c47a78;
+  --color-accent-soft: rgba(196, 122, 120, 0.16);
+  --color-error: #ff6b6b;
+  --color-success: #4ade80;
+
+  --color-bg: #1c1d27;
+  --color-bg-soft: #23242f;
+  --color-surface: #282a37;
+  --color-surface-base: #1f202b;
+
+  --color-text: #f1f2f5;
+  --color-text-secondary: #b6bcc6;
+  --color-placeholder: #767a86;
+  --color-border: #383a47;
+  --color-border-soft: rgba(255, 255, 255, 0.07);
+  --color-muted: #8a96a3;
+  --color-primary-soft: rgba(215, 237, 255, 0.14);
+
+  --color-dash-border: #383a47;
+  --color-dash-link-text: #c2c7d0;
+  --color-dash-link-icon: #7a808e;
+  --color-dash-link-icon-active: #d7edff;
+  --color-dash-link-active-bg: #333750;
+  --color-dash-section-bg: #282a37;
+
+  --color-brand-contrast: #171821;
+  --color-overlay: rgba(0, 0, 0, 0.6);
+  --color-toggle-track: #3a3b44;
+}

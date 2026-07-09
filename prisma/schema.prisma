@@ -1,0 +1,103 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  passwordHash String
+  name         String?
+  role         String   @default("admin")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Blog {
+  id               Int      @id @default(autoincrement())
+  title            String
+  slug             String   @unique
+  shortDescription String?
+  content          String?
+  tags             String[] @default([])
+  imagePath        String?
+  isPublished      Boolean  @default(false)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model Faq {
+  id          Int      @id @default(autoincrement())
+  question    String
+  answer      String
+  position    Int      @default(0)
+  isPublished Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Project {
+  id          Int      @id @default(autoincrement())
+  title       String
+  slug        String   @unique
+  client      String?
+  type        String?
+  year        Int?
+  description String?
+  content     String?
+  imagePath   String?
+  position    Int      @default(0)
+  isPublished Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Service {
+  id          Int      @id @default(autoincrement())
+  title       String
+  slug        String   @unique
+  description String?
+  content     String?
+  icon        String?
+  position    Int      @default(0)
+  isPublished Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model TeamMember {
+  id          Int      @id @default(autoincrement())
+  name        String
+  slug        String   @unique
+  role        String?
+  bio         String?
+  imagePath   String?
+  position    Int      @default(0)
+  isPublished Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ContactRequest {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model StaticPage {
+  id          Int      @id @default(autoincrement())
+  title       String
+  slug        String   @unique
+  content     String?
+  isPublished Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

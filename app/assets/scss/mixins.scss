@@ -1,0 +1,90 @@
+@use 'sass:math';
+@use 'sass:map';
+@use 'vars' as *;
+
+@mixin margin-center() {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@mixin list-reset-style() {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+@mixin text-dots($line-clamp: 1) {
+  @if $line-clamp <= 1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  } @else {
+    display: -webkit-box;
+    -webkit-line-clamp: $line-clamp;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+@mixin fs-lh($fs: 16px, $lh: 24px) {
+  font-size: $fs;
+  line-height: calc($lh / $fs);
+}
+
+@mixin tr-cb($time: 0.4s) {
+  transition: all $time cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+@mixin scrollbar($size: 8px) {
+  &::-webkit-scrollbar {
+    width: $size;
+  }
+  &::-webkit-scrollbar-track {
+    background: color-mix(in srgb, $color-4 40%, transparent);
+    border-radius: calc($size / 2);
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $color-4;
+    border-radius: calc($size / 2);
+  }
+}
+
+@mixin shadow-2() {
+  box-shadow:
+    0 1.127px 2.755px 0 rgba(0, 0, 0, 0.01),
+    0 2px 8px 0 rgba(0, 0, 0, 0.03),
+    0 8px 16px 0 rgba(0, 0, 0, 0.04);
+}
+
+@mixin shadow-4() {
+  box-shadow:
+    0 0.181px 0.543px 0 rgba(0, 0, 0, 0.07),
+    0 0.501px 1.503px 0 rgba(0, 0, 0, 0.11),
+    0 1px 6px 0 rgba(0, 0, 0, 0.11),
+    0 4px 12px 0 rgba(0, 0, 0, 0.15);
+}
+
+$breakpoints: (
+  'M1920': 1920px,
+  'M1680': 1680px,
+  'M1440': 1440px,
+  'M1360': 1360px,
+  'M1280': 1280px,
+  'M1140': 1140px,
+  'M1024': 1024px,
+  'M768': 768px,
+  'M640': 640px,
+  'M480': 480px,
+  'M425': 425px,
+);
+
+@mixin breakpoint($name) {
+  $max: map.get($breakpoints, $name);
+  @if $max == null {
+    @error "Invalid breakpoint key: #{$name}";
+  }
+  @media screen and (max-width: $max) {
+    @content;
+  }
+}

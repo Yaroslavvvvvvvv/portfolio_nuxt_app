@@ -1,0 +1,40 @@
+// Spacing scale (base 16px)
+$s-4px: 0.25rem;
+$s-8px: 0.5rem;
+$s-12px: 0.75rem;
+$s-16px: 1rem;
+$s-20px: 1.25rem;
+$s-24px: 1.5rem;
+$s-28px: 1.75rem;
+$s-32px: 2rem;
+$s-40px: 2.5rem;
+$s-48px: 3rem;
+$s-64px: 4rem;
+
+// Fonts
+$f-family: 'Arial', Helvetica, sans-serif;
+$f-family-secondary: 'Raleway', Helvetica, sans-serif;
+$f-family-public: 'Open Sans', 'Arial', sans-serif;
+
+// Transition
+$trans-time: 0.4s;
+
+// Concrete color used inside mixins (scrollbar etc.)
+$color-4: #94a3b8;
+
+// Token accessors — map to CSS custom properties defined in main.scss (theme-aware)
+$color-primary: var(--color-primary);
+$color-accent: var(--color-accent);
+$color-link: var(--color-link);
+$color-bg: var(--color-bg);
+$color-bg-soft: var(--color-bg-soft);
+$color-surface: var(--color-surface);
+$color-surface-base: var(--color-surface-base);
+$color-text: var(--color-text);
+$color-text-secondary: var(--color-text-secondary);
+$color-border: var(--color-border);
+$color-muted: var(--color-muted);
+$color-error: var(--color-error);
+$color-success: var(--color-success);
+$color-warning: var(--color-warning);
+$color-info: var(--color-info);

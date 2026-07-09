@@ -1,0 +1,101 @@
+{
+  "themeToggle": { "aria": "Перемкнути світлу / темну тему" },
+  "langSwitch": { "aria": "Змінити мову" },
+  "nav": {
+    "home": "Головна", "projects": "Проекти", "services": "Послуги", "team": "Команда",
+    "blog": "Блог", "contacts": "Контакти", "dashboard": "Дашборд"
+  },
+  "action": {
+    "save": "Зберегти", "update": "Оновити", "cancel": "Скасувати", "add": "Додати",
+    "edit": "Редагувати", "delete": "Видалити", "search": "Пошук", "login": "Увійти",
+    "logout": "Вийти", "readMore": "Читати далі", "send": "Надіслати", "contact": "Зв'язатися",
+    "viewCase": "Дивитись кейс", "allProjects": "Усі проекти", "allPosts": "Усі статті", "allServices": "Усі послуги"
+  },
+  "admin": {
+    "title": "Адмін-панель", "welcome": "Вітаю", "loginTitle": "Вхід в адмін-панель",
+    "loginError": "Невірний email або пароль", "pickResource": "Обери ресурс у меню, щоб керувати контентом.",
+    "createTitle": "Нова: {label}", "editTitle": "Редагувати: {label}"
+  },
+  "table": { "actions": "Дії", "confirmDelete": "Видалити запис?" },
+  "form": {
+    "commaSeparated": "Значення через кому",
+    "slugHint": "Лишіть порожнім — згенерується із заголовка",
+    "iconHint": "Клас PrimeIcon, напр. pi pi-compass"
+  },
+  "validation": {
+    "required": "Обов’язкове поле",
+    "email": "Введіть коректний email",
+    "minLength": "Мінімум {length} символів",
+    "maxLength": "Максимум {length} символів",
+    "minValue": "Мінімальне значення {value}",
+    "maxValue": "Максимальне значення {value}",
+    "wrongInput": "Некоректне значення",
+    "passwordsMatch": "Паролі мають збігатися",
+    "nameFormat": "Некоректний формат імені"
+  },
+  "common": { "empty": "Немає записів.", "loading": "Завантаження…" },
+  "toast": { "created": "Створено", "updated": "Оновлено", "deleted": "Видалено", "error": "Щось пішло не так", "loggedIn": "Ви увійшли", "loggedOut": "Ви вийшли" },
+  "confirm": { "deleteTitle": "Видалити запис?", "deleteText": "Цю дію не можна скасувати.", "accept": "Видалити", "reject": "Скасувати" },
+  "dashboard": { "manage": "Керувати", "contentOverview": "Огляд контенту", "published": "Опубліковано", "draft": "Чернетки" },
+  "fields": {
+    "id": "ID", "title": "Заголовок", "slug": "Slug", "shortDescription": "Короткий опис",
+    "content": "Контент", "contentHtml": "Контент (HTML)", "tags": "Теги", "image": "Зображення (URL)",
+    "isPublished": "Опубліковано", "question": "Питання", "answer": "Відповідь", "position": "Позиція",
+    "client": "Клієнт", "type": "Тип", "year": "Рік", "name": "Ім'я", "role": "Роль",
+    "bio": "Біографія", "icon": "Іконка", "photo": "Фото (URL)",
+    "isRead": "Опрацьовано", "createdAt": "Дата"
+  },
+  "resources": {
+    "blog": { "one": "Стаття", "many": "Блог" },
+    "projects": { "one": "Проект", "many": "Проекти" },
+    "services": { "one": "Послуга", "many": "Послуги" },
+    "team": { "one": "Учасник", "many": "Команда" },
+    "faq": { "one": "Питання", "many": "FAQ" },
+    "pages": { "one": "Сторінка", "many": "Статичні сторінки" },
+    "requests": { "one": "Заявка", "many": "Заявки" }
+  },
+  "home": {
+    "heroTitle": "Сайти повного циклу, зроблені з любов'ю до деталей",
+    "heroText": "Стратегія, дизайн і код — студія, що швидко випускає вилизані продукти.",
+    "philosophyTitle": "Наша філософія",
+    "principles": {
+      "craftTitle": "Майстерність", "craftText": "Важлива кожна деталь — від пікселя до пайплайну.",
+      "speedTitle": "Швидкість", "speedText": "Тижні, а не місяці. Виграє темп.",
+      "honestyTitle": "Чесність", "honestyText": "Прозорі ціни й зрозумілий обсяг робіт.",
+      "boldnessTitle": "Сміливість", "boldnessText": "Ми штовхаємо ідеї, що виділяються."
+    },
+    "servicesTitle": "Що ми робимо", "servicesText": "Від першої ідеї до продукту, що росте.",
+    "worksTitle": "Обрані роботи", "worksText": "Проекти, якими ми пишаємось.",
+    "faqTitle": "Питання", "blogTitle": "З журналу",
+    "ctaTitle": "Готові почати?", "ctaText": "Розкажіть про свій проект — відповімо протягом дня."
+  },
+  "projects": { "title": "Проекти", "subtitle": "Обрані роботи, 2024–2025.", "empty": "Поки що немає проектів." },
+  "servicesPage": { "title": "Послуги", "subtitle": "Веб повного циклу, від і до.", "empty": "Поки що немає послуг." },
+  "team": { "title": "Команда", "subtitle": "Люди, що стоять за роботою.", "empty": "Поки що немає команди." },
+  "blog": { "title": "Блог", "empty": "Поки що немає статей." },
+  "public": {
+    "heroText": "Публічні сторінки, справжня адмін-панель і темна тема — усе в одному Nuxt-проєкті.",
+    "about": "Про нас", "toAdmin": "Адмінка", "faqTitle": "Часті запитання"
+  },
+  "contacts": {
+    "title": "Контакти", "address": "Адреса", "phone": "Телефон", "emailLabel": "Email",
+    "formTitle": "Напишіть нам", "name": "Ім'я", "message": "Повідомлення",
+    "sent": "Дякуємо! Ми звʼяжемось найближчим часом."
+  },
+  "auth": {
+    "loginTitle": "Вхід", "signupTitle": "Реєстрація", "forgotTitle": "Відновлення пароля",
+    "restoreTitle": "Новий пароль", "email": "Email", "password": "Пароль",
+    "name": "Ім'я", "confirmPassword": "Підтвердіть пароль", "haveAccount": "Вже є акаунт?",
+    "noAccount": "Ще немає акаунта?", "forgot": "Забули пароль?", "submit": "Продовжити",
+    "stubNote": "Публічна автентифікація тут — UI-заглушка (бекенду для юзерів ще нема)."
+  },
+  "error": { "notFound": "Сторінку не знайдено", "serverError": "Щось пішло не так", "backHome": "На головну", "resourceNotFound": "Ресурс не знайдено" },
+  "server": {
+    "invalidCredentials": "Невірний email або пароль",
+    "tooManyAttempts": "Забагато спроб входу. Спробуйте пізніше.",
+    "invalidData": "Перевірте поля форми",
+    "invalidEmail": "Некоректний email",
+    "duplicate": "Запис із такими значеннями вже існує",
+    "notFound": "Запис не знайдено"
+  }
+}
