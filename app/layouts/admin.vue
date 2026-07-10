@@ -29,6 +29,10 @@ function closeSidebar() {
         <NuxtLink to="/admin" class="admin-nav__link" @click="closeSidebar">
           <i class="pi pi-home" /><span>{{ t('nav.dashboard') }}</span>
         </NuxtLink>
+        <!-- Page-scoped settings, not a CRUD resource — hence not in the registry. -->
+        <NuxtLink to="/admin/home" class="admin-nav__link" @click="closeSidebar">
+          <i class="pi pi-desktop" /><span>{{ t('nav.homeSettings') }}</span>
+        </NuxtLink>
         <NuxtLink
           v-for="r in resources"
           :key="r.name"

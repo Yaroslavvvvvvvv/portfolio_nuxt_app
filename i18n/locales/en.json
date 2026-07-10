@@ -14,7 +14,8 @@
     "contacts": "Contacts",
     "dashboard": "Dashboard",
     "openMenu": "Open menu",
-    "closeMenu": "Close menu"
+    "closeMenu": "Close menu",
+    "homeSettings": "Home page"
   },
   "action": {
     "save": "Save",
@@ -41,7 +42,8 @@
     "loginError": "Invalid email or password",
     "pickResource": "Pick a resource in the menu to manage content.",
     "createTitle": "New: {label}",
-    "editTitle": "Edit: {label}"
+    "editTitle": "Edit: {label}",
+    "homeSettingsHint": "Home page content the client can change without a developer"
   },
   "table": {
     "actions": "Actions",
@@ -55,7 +57,12 @@
     "metaDescriptionHint": "Up to ~160 characters. Shown in Google results",
     "ogImageHint": "Preview when shared on social networks. Empty — falls back to the main image",
     "uploadImage": "Upload",
-    "removeImage": "Remove"
+    "removeImage": "Remove",
+    "uploadVideo": "Upload video",
+    "removeVideo": "Remove",
+    "videoHint": "MP4 or WebM, up to 64 MB. Empty — the banner falls back to a static background",
+    "telegramHint": "e.g. https://t.me/obsigma. Empty — the header button points at Contacts",
+    "heroImageHint": "Used when no video is set. The slow zoom is applied automatically"
   },
   "validation": {
     "required": "This field is required",
@@ -117,7 +124,10 @@
     "createdAt": "Date",
     "metaTitle": "SEO: title",
     "metaDescription": "SEO: description",
-    "ogImage": "SEO: social share image"
+    "ogImage": "SEO: social share image",
+    "heroVideo": "Hero video",
+    "telegram": "Telegram link",
+    "heroImage": "Hero image"
   },
   "resources": {
     "blog": {
@@ -196,7 +206,9 @@
     "heroText": "Public pages, a real admin panel and dark mode — all in one Nuxt project.",
     "about": "About",
     "toAdmin": "Admin",
-    "faqTitle": "Frequently asked questions"
+    "faqTitle": "Frequently asked questions",
+    "writeTelegram": "Message on Telegram",
+    "discussProject": "Discuss a project"
   },
   "contacts": {
     "title": "Contacts",
@@ -239,7 +251,9 @@
     "notFound": "Record not found",
     "noFile": "No file selected",
     "invalidImage": "Unsupported format. Allowed: JPEG, PNG, WebP, GIF, AVIF",
-    "imageTooLarge": "File is too large (5 MB max)"
+    "imageTooLarge": "File is too large (5 MB max)",
+    "invalidVideo": "Unsupported format. Allowed: MP4, WebM",
+    "videoTooLarge": "Video is too large (64 MB max)"
   },
   "about": {
     "title": "About us"

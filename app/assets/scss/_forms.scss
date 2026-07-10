@@ -1,3 +1,5 @@
+@use 'mixins' as *;
+
 /* Shared form controls + the AppField kit (ported from Complat) */
 
 .form-field {
@@ -66,6 +68,18 @@
   border: 1px solid var(--color-border);
   border-radius: 8px;
   background: var(--color-surface);
+}
+
+/* Video is 16:9 — a 96px square would letterbox it into a sliver. */
+.app-field__preview--video {
+  width: 240px;
+  height: 135px;
+
+  @include breakpoint('M480') {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
 }
 
 .app-field__preview--empty {

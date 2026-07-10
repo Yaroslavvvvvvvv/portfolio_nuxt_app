@@ -26,6 +26,17 @@ $color-4: #94a3b8;
 $color-primary: var(--color-primary);
 $color-accent: var(--color-accent);
 $color-link: var(--color-link);
+// Public header geometry. Shared, because four things must agree to the pixel:
+// the header's own height, the top padding that clears it, the negative margin
+// the full-screen hero uses to slide back under it, and the --header-total
+// custom property PublicHeader reads from JS.
+//
+// The bar has no vertical padding of its own — its content is centred in this
+// height. The tallest child is the 60px nav pill, so this leaves 14px of air
+// above and below it.
+$header-height: 88px;
+$header-total: $header-height + 1px; // + border-bottom
+
 $color-bg: var(--color-bg);
 $color-bg-soft: var(--color-bg-soft);
 $color-surface: var(--color-surface);

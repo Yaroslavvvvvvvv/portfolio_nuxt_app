@@ -1,7 +1,7 @@
 @use 'vars' as *;
 @use 'mixins' as *;
 
-$header-height: 68px;
+// $header-height / $header-total live in vars.scss — _base.scss needs them too.
 
 /* ---------- BLOCK: pub-header ---------- */
 .pub-header {
@@ -10,6 +10,41 @@ $header-height: 68px;
   background: color-mix(in srgb, var(--color-surface) 92%, transparent);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--color-border);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+
+  // Transparent over the home hero video, until the visitor scrolls past it.
+  // Rather than restyling every child, redefine the tokens they already read —
+  // brand, links, burger, theme toggle and flags all follow for free. The CTA is
+  // the exception: it reads --color-cta, which is never overridden here.
+  &--overlay {
+    --color-text: #ffffff;
+    --color-text-secondary: #{rgba(#fff, 0.7)};
+    --color-primary: #ffffff;
+    --color-brand-contrast: #1b2f47;
+    --color-border: #{rgba(#fff, 0.32)};
+    --color-link: #ffffff;
+
+    --header-pill-bg: #{rgba(#fff, 0.08)};
+    --header-pill-border: #{rgba(#fff, 0.14)};
+    --header-pill-active-bg: #{rgba(#fff, 0.16)};
+
+    // White disc, navy glyph — the badge has to punch through any video frame.
+    --header-mark-bg: #ffffff;
+    --header-mark-fg: #1b2f47;
+
+    background: transparent;
+    backdrop-filter: none;
+    border-bottom-color: transparent;
+  }
+
+  // With the mobile panel open the bar must match it exactly. The default
+  // background is 92% opaque — enough for a bright hero frame to bleed through
+  // and draw a coloured seam across the top of an otherwise solid panel.
+  &--menu {
+    background: var(--color-bg);
+    backdrop-filter: none;
+    border-bottom-color: transparent;
+  }
 
   &__inner {
     display: flex;
@@ -18,29 +53,64 @@ $header-height: 68px;
     height: $header-height;
   }
 
+  /* ---------- brand: round Σ badge + wordmark ---------- */
   &__brand {
-    font-family: $f-family-secondary;
-    font-weight: 700;
-    font-size: 1.25rem;
-    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
   }
 
+  // The mark is the diamond itself — no disc behind it. `color` paints the body
+  // (the SVG fills it with currentColor); the sigma, the facet lines and the
+  // axis markers all take its counterpart.
+  &__mark {
+    display: block;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    color: var(--header-mark-bg);
+
+    .icon-logo__glyph,
+    .icon-logo__marker {
+      fill: var(--header-mark-fg);
+    }
+
+    .icon-logo__line {
+      stroke: var(--header-mark-fg);
+    }
+  }
+
+  &__wordmark {
+    font-family: $f-family-secondary;
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--color-text);
+
+    // Below this the badge alone carries the brand; the wordmark would crowd
+    // the burger.
+    @include breakpoint('M480') {
+      display: none;
+    }
+  }
+
+  /* ---------- nav: a pill floating between brand and actions ---------- */
   &__nav {
     display: flex;
-    gap: 1.25rem;
-    margin-right: auto;
-
-    a {
-      font-weight: 600;
-      font-size: 0.95rem;
-      color: var(--color-text-secondary);
-      transition: color 0.2s;
-
-      &:hover,
-      &.router-link-exact-active {
-        color: var(--color-text);
-      }
-    }
+    align-items: center;
+    gap: 2px;
+    // `auto` on both sides centres the pill in whatever space brand and actions
+    // leave, rather than in the viewport — it stays put as their widths change.
+    margin-inline: auto;
+    padding: 6px;
+    border-radius: 999px;
+    background: var(--header-pill-bg);
+    border: 1px solid var(--header-pill-border);
+    backdrop-filter: blur(10px);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 
     // Mobile: a full-height panel under the header, faded in rather than
     // toggled with `display` (which cannot animate). It stays in the layout so
@@ -50,15 +120,18 @@ $header-height: 68px;
       top: 0;
       left: 0;
       width: 100%;
-      margin-top: $header-height;
-      height: calc(100dvh - #{$header-height});
+      margin: $header-total 0 0;
+      height: calc(100dvh - #{$header-total});
       z-index: 30;
       flex-direction: column;
       align-items: stretch;
       gap: 0;
-      margin-right: 0;
+      // Shed the pill: full-bleed panel, square, opaque.
       padding: 0.5rem 16px calc(1.5rem + env(safe-area-inset-bottom));
+      border: 0;
+      border-radius: 0;
       background: var(--color-bg);
+      backdrop-filter: none;
       overflow-y: auto;
       opacity: 0;
       pointer-events: none;
@@ -77,25 +150,41 @@ $header-height: 68px;
     }
   }
 
-  &__nav-link,
-  &__nav-admin {
+  &__nav-link {
+    padding: 11px 18px;
+    border-radius: 999px;
+    font-family: $f-family-secondary;
+    font-weight: 700;
+    font-size: 0.72rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--color-text-secondary);
+    transition: color 0.2s, background-color 0.2s;
+
+    &:hover {
+      color: var(--color-text);
+    }
+
+    // `-active`, not `-exact-active`: /blog/some-post must still light up "Blog".
+    &.router-link-active {
+      background: var(--header-pill-active-bg);
+      color: var(--color-text);
+    }
+
     @include breakpoint('M768') {
       display: flex;
       align-items: center;
       min-height: 56px;
-      font-size: 1.05rem;
+      padding: 0;
+      border-radius: 0;
+      font-size: 0.95rem;
+      letter-spacing: 0.06em;
       border-bottom: 1px solid var(--color-border);
-    }
-  }
 
-  // The nav carries its own admin entry on mobile, where __admin is hidden.
-  // Scoped under __nav to outrank the `.pub-header__nav a` colour rule.
-  &__nav &__nav-admin {
-    display: none;
-
-    @include breakpoint('M768') {
-      display: flex;
-      color: var(--color-link);
+      &.router-link-active {
+        background: transparent;
+      }
     }
   }
 
@@ -103,9 +192,47 @@ $header-height: 68px;
     display: flex;
     align-items: center;
     gap: 1rem;
+    flex-shrink: 0;
 
+    // The nav is out of flow on mobile, so nothing else pushes the cluster right.
     @include breakpoint('M768') {
       margin-left: auto;
+    }
+  }
+
+  /* ---------- call to action ---------- */
+  &__cta {
+    display: inline-flex;
+    align-items: center;
+    padding: 13px 22px;
+    border-radius: 999px;
+    background: var(--color-cta);
+    color: var(--color-cta-contrast);
+    font-family: $f-family-secondary;
+    font-weight: 700;
+    font-size: 0.72rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background: var(--color-cta-hover);
+    }
+
+    // The bar is too tight for it on mobile; the panel carries it instead.
+    @include breakpoint('M768') {
+      display: none;
+    }
+
+    &--mobile {
+      display: none;
+
+      @include breakpoint('M768') {
+        display: inline-flex;
+        justify-content: center;
+        margin-top: 1.25rem;
+      }
     }
   }
 
@@ -117,7 +244,7 @@ $header-height: 68px;
     width: 38px;
     height: 38px;
     border: 1px solid var(--color-border);
-    border-radius: 8px;
+    border-radius: 999px;
     background: transparent;
     color: var(--color-text);
     cursor: pointer;
@@ -138,19 +265,6 @@ $header-height: 68px;
     &--visible {
       opacity: 1;
       visibility: visible;
-    }
-  }
-
-  &__admin {
-    font-weight: 700;
-    font-size: 0.85rem;
-    padding: 7px 14px;
-    border-radius: 8px;
-    background: var(--color-primary);
-    color: var(--color-brand-contrast);
-
-    @include breakpoint('M480') {
-      display: none;
     }
   }
 }
@@ -175,35 +289,82 @@ $header-height: 68px;
   }
 }
 
-/* ---------- BLOCK: pub-hero ---------- */
-.pub-hero {
-  padding: 5rem 0 3rem;
-  text-align: center;
+/* ---------- BLOCK: home-hero (full-screen banner: video, still, or gradient) ---------- */
+.home-hero {
+  position: relative;
+  // Break out of .app-container and span the window. See .app-wrapper's
+  // `overflow-x: clip`, which absorbs the scrollbar-width overhang.
+  margin-inline: calc(50% - 50vw);
+  // Cancel .app-wrapper__content's top padding so the banner starts at the very
+  // top of the viewport, behind the (transparent) fixed header.
+  margin-top: -$header-total;
+  height: 100dvh;
+  overflow: hidden;
+  // Shown while the video buffers, when none is set, and under reduced motion.
+  background:
+    radial-gradient(120% 120% at 50% 0%, #24405f 0%, #1b2f47 55%, #101b2a 100%);
 
-  &__title {
-    font-family: $f-family-secondary;
-    font-size: 2.75rem;
-    margin: 0 0 1rem;
-    color: var(--color-text);
+  &__video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    // Decorative: never a focus or drag target.
+    pointer-events: none;
 
-    @include breakpoint('M768') {
-      font-size: 2.1rem;
-    }
-
-    @include breakpoint('M480') {
-      font-size: 1.7rem;
+    // A background video is pure motion with no informational value, so it goes
+    // away entirely rather than being merely paused. JS pauses it too, so the
+    // hidden element does not keep decoding frames.
+    @media (prefers-reduced-motion: reduce) {
+      display: none;
     }
   }
 
-  &__text {
-    max-width: 540px;
-    margin: 0 auto;
-    font-size: 1.1rem;
-    color: var(--color-text-secondary);
+  // A still banner instead of a video. The slow zoom (Ken Burns) is what sells
+  // it as a live frame; `alternate` means it breathes in and out rather than
+  // snapping back, so there is no seam to hide.
+  &__image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    transform-origin: 50% 55%;
+    animation: home-hero-zoom 32s ease-in-out infinite alternate;
+    will-change: transform;
+
+    // Motion is the whole effect here, but the image still carries the design.
+    // Unlike the video it stays — only the movement stops.
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
   }
 
-  @include breakpoint('M768') {
-    padding: 3rem 0 2rem;
+  // The banner carries no copy, but the transparent header sits on top of it —
+  // the darkened band along the top is what keeps its white links legible over
+  // a bright frame.
+  &__scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.5) 0%,
+      rgba(0, 0, 0, 0.15) 40%,
+      rgba(0, 0, 0, 0.15) 100%
+    );
+  }
+}
+
+// Never starts at scale(1): the pan needs slack on every side, or the image
+// edge would swing into frame. 1.04 buys 2% of headroom, the drift uses 1.2%.
+@keyframes home-hero-zoom {
+  from {
+    transform: scale(1.04) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.13) translate3d(-1.2%, -1%, 0);
   }
 }
 
@@ -597,8 +758,8 @@ $header-height: 68px;
   }
 }
 
-/* ---------- BLOCK: pub-principles (philosophy) ---------- */
-.pub-principles {
+/* ---------- BLOCK: home-principles (philosophy) ---------- */
+.home-principles {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1.25rem;
@@ -611,7 +772,7 @@ $header-height: 68px;
   }
 }
 
-.pub-principle {
+.home-principle {
   padding: 1.5rem;
   border: 1px solid var(--color-border);
   border-radius: 14px;
@@ -733,8 +894,8 @@ $header-height: 68px;
   margin-top: auto;
 }
 
-/* ---------- BLOCK: pub-cta ---------- */
-.pub-cta {
+/* ---------- BLOCK: home-cta ---------- */
+.home-cta {
   text-align: center;
   padding: 4rem 2rem;
   margin: 3rem 0;

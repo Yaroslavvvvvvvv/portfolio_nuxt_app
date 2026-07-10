@@ -14,7 +14,8 @@
     "contacts": "Контакти",
     "dashboard": "Дашборд",
     "openMenu": "Відкрити меню",
-    "closeMenu": "Закрити меню"
+    "closeMenu": "Закрити меню",
+    "homeSettings": "Головна"
   },
   "action": {
     "save": "Зберегти",
@@ -41,7 +42,8 @@
     "loginError": "Невірний email або пароль",
     "pickResource": "Обери ресурс у меню, щоб керувати контентом.",
     "createTitle": "Нова: {label}",
-    "editTitle": "Редагувати: {label}"
+    "editTitle": "Редагувати: {label}",
+    "homeSettingsHint": "Контент головної сторінки, який клієнт може змінювати без розробника"
   },
   "table": {
     "actions": "Дії",
@@ -55,7 +57,12 @@
     "metaDescriptionHint": "До ~160 символів. Показується у видачі Google",
     "ogImageHint": "Прев’ю при поширенні в соцмережах. Порожнє — візьметься головне зображення",
     "uploadImage": "Завантажити",
-    "removeImage": "Прибрати"
+    "removeImage": "Прибрати",
+    "uploadVideo": "Завантажити відео",
+    "removeVideo": "Прибрати",
+    "videoHint": "MP4 або WebM, до 64 МБ. Порожнє — банер покаже статичне тло",
+    "telegramHint": "Напр. https://t.me/obsigma. Порожнє — кнопка в шапці веде на «Контакти»",
+    "heroImageHint": "Використовується, коли відео не задане. Повільний зум додається автоматично"
   },
   "validation": {
     "required": "Обов’язкове поле",
@@ -117,7 +124,10 @@
     "createdAt": "Дата",
     "metaTitle": "SEO: заголовок",
     "metaDescription": "SEO: опис",
-    "ogImage": "SEO: зображення для соцмереж"
+    "ogImage": "SEO: зображення для соцмереж",
+    "heroVideo": "Відео в банері",
+    "telegram": "Посилання на Telegram",
+    "heroImage": "Картинка банера"
   },
   "resources": {
     "blog": {
@@ -196,7 +206,9 @@
     "heroText": "Публічні сторінки, справжня адмін-панель і темна тема — усе в одному Nuxt-проєкті.",
     "about": "Про нас",
     "toAdmin": "Адмінка",
-    "faqTitle": "Часті запитання"
+    "faqTitle": "Часті запитання",
+    "writeTelegram": "Написати в Telegram",
+    "discussProject": "Обговорити проєкт"
   },
   "contacts": {
     "title": "Контакти",
@@ -239,7 +251,9 @@
     "notFound": "Запис не знайдено",
     "noFile": "Файл не вибрано",
     "invalidImage": "Непідтримуваний формат. Дозволено: JPEG, PNG, WebP, GIF, AVIF",
-    "imageTooLarge": "Файл завеликий (максимум 5 МБ)"
+    "imageTooLarge": "Файл завеликий (максимум 5 МБ)",
+    "invalidVideo": "Непідтримуваний формат. Дозволено: MP4, WebM",
+    "videoTooLarge": "Відео завелике (максимум 64 МБ)"
   },
   "about": {
     "title": "Про нас"

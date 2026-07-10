@@ -4,11 +4,12 @@
       <PublicHeader />
     </div>
     <div class="app-wrapper__content">
-      <!-- Single place that bounds public page width. Pages must not re-apply
-           .app-container; narrower shells (.pub-article) just nest inside. -->
-      <div class="app-container">
+      <!-- Single place that bounds public page width, and the page's `main`
+           landmark. Pages must not re-apply .app-container, nor nest a second
+           `main` element; narrower shells (.pub-article) just nest inside. -->
+      <main class="app-container">
         <slot />
-      </div>
+      </main>
     </div>
     <div class="app-wrapper__bottom">
       <PublicFooter />

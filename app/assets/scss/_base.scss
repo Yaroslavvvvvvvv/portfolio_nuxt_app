@@ -49,6 +49,20 @@ h3 {
   color: var(--color-text-secondary);
 }
 
+/* Removed from the visual layer, kept for screen readers and crawlers.
+   `display: none` would hide it from both. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+
 .field-link {
   color: var(--color-link);
   font-weight: 600;
@@ -61,6 +75,11 @@ h3 {
   flex-direction: column;
   justify-content: space-between;
   min-height: 100vh;
+  // Full-bleed sections escape .app-container with `margin-inline: calc(50% - 50vw)`.
+  // 50vw counts the scrollbar, so they end up a few px wider than the viewport.
+  // `clip` (not `hidden`) swallows that overhang without creating a scroll
+  // container — which would break `position: sticky` and scroll anchoring.
+  overflow-x: clip;
 
   &__top {
     position: fixed;
@@ -75,7 +94,9 @@ h3 {
     display: flex;
     flex-direction: column;
     flex: 1 0 auto;
-    padding-top: 72px;
+    // Must equal the header's full height: the home hero cancels it with an
+    // equal negative margin to sit flush against the top of the viewport.
+    padding-top: $header-total;
   }
 
   &__bottom {
@@ -88,6 +109,42 @@ h3 {
 .header-lang {
   position: relative;
   display: inline-flex;
+
+  // Inline variant (public header): both locales side by side, no dropdown.
+  &--inline {
+    align-items: center;
+    gap: 6px;
+  }
+
+  &__sep {
+    // --color-text, not --color-muted: the muted grey reads the same in both
+    // themes, so it stayed grey against the transparent header. This token is
+    // already flipped to pure white there, and to near-black on the light theme.
+    color: var(--color-text);
+    font-size: 0.72rem;
+  }
+
+  &__code {
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.72rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    transition: color 0.2s;
+
+    &:hover {
+      color: var(--color-text);
+    }
+
+    &--active {
+      color: var(--color-text);
+      cursor: default;
+    }
+  }
 
   &__current {
     display: inline-flex;

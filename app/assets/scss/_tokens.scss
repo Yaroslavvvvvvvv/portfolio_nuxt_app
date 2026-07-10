@@ -1,6 +1,12 @@
+@use 'vars' as *;
+
 /* Theme tokens — CSS custom properties for light & dark */
 :root,
 .app-theme--light {
+  /* Mirrors $header-total so PublicHeader can read the header's height from JS.
+     Two sources of truth for this number have already drifted apart once. */
+  --header-total: #{$header-total};
+
   --color-primary: #1b2f47;
   --color-primary-light: #7fb2ee;
   --color-accent: #8e3433;
@@ -35,6 +41,26 @@
   --color-brand-contrast: #ffffff;
   --color-overlay: rgba(0, 0, 0, 0.4);
   --color-toggle-track: #dfe3e8;
+
+  /* Header CTA. Deliberately NOT --color-primary: the header goes transparent
+     over the hero video, where navy-on-dark would vanish. This indigo has to
+     hold its own against any frame, so it stays the same in every theme. */
+  --color-cta: #3b2fe3;
+  --color-cta-hover: #3226c6;
+  --color-cta-contrast: #ffffff;
+
+  /* The pill that wraps the header nav. Three states — light, dark, and
+     transparent-over-video — so the pill is tokenised rather than hard-coded. */
+  --header-pill-bg: rgba(0, 0, 0, 0.04);
+  --header-pill-border: var(--color-border);
+  --header-pill-active-bg: var(--color-surface);
+
+  /* The logo mark: `bg` paints the rhombus, `fg` the sigma inside it. Neither
+     can ride on --color-primary: that navy is a hair away from the dark theme's
+     background, and --color-brand-contrast is darker still, so the mark would be
+     dark-on-dark. It inverts instead, exactly like .admin-brand__logo does. */
+  --header-mark-bg: var(--color-primary);
+  --header-mark-fg: #ffffff;
 }
 
 .app-theme--dark {
@@ -71,4 +97,13 @@
   --color-brand-contrast: #171821;
   --color-overlay: rgba(0, 0, 0, 0.6);
   --color-toggle-track: #3a3b44;
+
+  /* --color-cta stays as defined in :root — it must read the same in both themes. */
+  --header-pill-bg: rgba(255, 255, 255, 0.05);
+  --header-pill-border: rgba(255, 255, 255, 0.09);
+  --header-pill-active-bg: rgba(255, 255, 255, 0.1);
+
+  /* Inverted, matching .admin-brand__logo in the dark admin shell. */
+  --header-mark-bg: #d7edff;
+  --header-mark-fg: #171821;
 }

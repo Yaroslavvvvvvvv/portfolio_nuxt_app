@@ -98,6 +98,24 @@ model ContactRequest {
   updatedAt DateTime @updatedAt
 }
 
+// Key-value store for small editable bits of the site (hero video, contact
+// details, CTA copy) that do not deserve a model each.
+//
+// `locale` is '*' for values that are the same in every language (a video
+// path). Localised copy will use the actual code ('uk', 'en'), which is why the
+// unique key is composite. It is NOT nullable on purpose: Postgres treats NULLs
+// as distinct in a unique index, so two NULL rows with the same key would both
+// be allowed.
+model Setting {
+  id        Int      @id @default(autoincrement())
+  key       String
+  locale    String   @default("*")
+  value     String?
+  updatedAt DateTime @updatedAt
+
+  @@unique([key, locale])
+}
+
 model StaticPage {
   id              Int      @id @default(autoincrement())
   title           String
