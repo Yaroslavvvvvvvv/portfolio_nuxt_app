@@ -10,7 +10,7 @@ const { t } = useI18n()
     </div>
     <div class="auth__grid">
       <aside class="auth__aside">
-        <div class="auth__banner-title">Admin Starter</div>
+        <div class="auth__banner-title">Obsigma</div>
         <div class="auth__banner-text">{{ t('public.heroText') }}</div>
       </aside>
       <div class="auth__main">

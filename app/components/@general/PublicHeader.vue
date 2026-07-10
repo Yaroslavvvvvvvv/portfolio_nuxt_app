@@ -35,7 +35,7 @@ onBeforeUnmount(() => app.SET_FIXED_STATUS(false))
 <template>
   <header class="pub-header">
     <div class="app-container pub-header__inner">
-      <NuxtLink to="/" class="pub-header__brand">Starter</NuxtLink>
+      <NuxtLink to="/" class="pub-header__brand">Obsigma</NuxtLink>
 
       <nav
         id="pub-header-nav"

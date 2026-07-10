@@ -1,6 +1,8 @@
-# Studio Site + Admin
+# Obsigma — Studio Site + Admin
 
 Сайт веб-студії з власною адмін-панеллю. Референс вигляду й структури — **[overchenko.studio](https://overchenko.studio/)**.
+
+Назва: **Obsigma** — обсидіан (вулканічне скло, з якого робили найгостріші леза) + **Σ** (сума частин; в теорії формальних мов — алфавіт, з якого будується все інше). Знак — `Σ`, вирізана в огранованому камені.
 
 ---
 
@@ -40,16 +42,20 @@
 nuxt-admin-starter/
 ├── app/                      # фронт
 │   ├── pages/                #   public (SSR) + /admin (SPA)
-│   ├── components/@core      #   AppField-кіт, theme toggle, HeaderLang
+│   ├── components/@core      #   AppField-кіт (input/textarea/select/switch/image/editor), theme toggle, HeaderLang
 │   │            /@general    #   PublicHeader/Footer
 │   │            /admin       #   ResourceTable, ResourceForm
-│   ├── config/resources/     #   опис ресурсів (config-driven CRUD)
-│   ├── layouts/              #   default (public), admin, auth
-│   ├── stores/               #   Pinia (useAppStore: тема/розмір/…)
-│   └── assets/scss/          #   дизайн-система (vars/mixins/main), BEM, теми
+│   ├── composables/          #   useResource (CRUD-клієнт), useSeo (usePageSeo / useJsonLd)
+│   ├── config/resources/     #   опис ресурсів (config-driven CRUD) + seo.ts (спільні SEO-поля)
+│   ├── layouts/              #   default (public, тримає .app-container), admin, auth
+│   ├── stores/               #   Pinia (useAppStore: тема/розмір/лоадер/скрол-лок)
+│   ├── utils/                #   sanitize (ізоморфний DOMPurify), validation, serverError, …
+│   └── assets/scss/          #   дизайн-система (tokens/vars/mixins/main), BEM, теми
 ├── server/
-│   ├── api/                  #   Nitro: auth, admin CRUD, public content
-│   └── utils/                #   prisma, crud-движок, реєстри ресурсів
+│   ├── api/                  #   Nitro: auth, admin CRUD, upload, public content, __sitemap__/urls
+│   ├── routes/uploads/       #   віддача файлів локального драйвера сховища
+│   └── utils/                #   prisma, crud-движок, реєстри ресурсів, storage, rateLimit
+├── shared/utils/             # код, автоімпортований і в app, і в server (Nuxt 4)
 ├── prisma/                   #   schema + migrations + seed
 └── i18n/
     ├── i18n.config.ts        #   messages бандляться синхронно (не lazy) — SSR не блимає fallback-локаллю
@@ -95,6 +101,11 @@ nuxt-admin-starter/
 - **Публічний сайт** (агенційна структура як overchenko): багатосекційна головна (hero → філософія → послуги → роботи → FAQ → блог → CTA), `/projects` + кейс, `/services`, `/team`, `/blog` + стаття, `/contacts`, `/about`, `/page/[slug]`, auth-сторінки (UI-стаби), кастомна 404/500.
 - **UX:** повний адаптив (мобільний drawer + burger-меню), BEM по всьому проекту, HeaderLang з прапорцями, форм-кіт AppField (FloatLabel + кастомний switch + Message-помилки).
 - **Бекенд:** auth (login/logout/guard), generic admin CRUD, публічний content API, Prisma + Postgres, seed.
+- **Медіа:** upload зображень (`POST /api/admin/upload`), драйвери `local` / `s3` (R2/B2 через `aws4fetch`), тип файлу визначається за магічними байтами; SVG заборонено.
+- **Контент:** rich-text редактор (PrimeVue Editor / Quill) з завантаженням картинок замість base64; ізоморфна санітизація — тіло статей є в SSR-HTML.
+- **SEO:** `usePageSeo` / `useJsonLd` на всіх публічних роутах, sitemap + robots (модулі), canonical, JSON-LD, SEO-поля в адмінці.
+- **Безпека:** rate-limit на логіні й контактній формі, whitelist `sortField`, `pick(fillable)` проти mass-assignment, yup-валідація на сервері.
+- **Бренд:** назва **Obsigma** (обсидіан + Σ), фавікон-пакет (`.ico` / 96px / apple-touch / PWA 192+512), `site.webmanifest`, `theme-color`, дефолтний `og:image`.
 
 **Логін:** креденшли адміна беруться з `.env` (`ADMIN_EMAIL` / `ADMIN_PASSWORD`) — не зберігаються в коді.
 
@@ -114,15 +125,38 @@ nuxt-admin-starter/
 - [x] **Валідація за правилами** — yup-схеми (email/required), реактивно, як Complat. ✓
 - [x] **🔍 SEO** — фундамент закрито; лишились продуктивність і BreadcrumbList (див. блок нижче). ✓
 
-### 📝 Кожен блок → в адмінку (систематичний прохід — НАСТУПНА ВЕЛИКА ФАЗА)
-Пройти **блок за блоком по кожній сторінці** й зробити кожен керованим через адмінку (щоб клієнт міняв усе сам, без розробника). Кандидати із зараз захардкодженого:
-- **Hero** головної (заголовок / підзаголовок / текст CTA)
-- **Філософія** — 4 принципи → ресурс `principles`
-- **CTA-секція** «Готові почати?»
-- **Контактні дані** (адреса / телефон / email)
-- ~~**SEO-мета** сторінок (metaTitle / metaDescription)~~ — ✓ зроблено (поля в адмінці для blog/projects/pages)
+### 📝 Прохід по блоках: стилі + функціонал + адмінка (ПОТОЧНА ФАЗА)
 
-Дрібні тексти (hero / CTA / контакти) → узагальнений **key-value ресурс `settings`/`variables`**, щоб не плодити окремі моделі під кожен рядок.
+Ідемо **сторінка за сторінкою, блок за блоком**. Для кожного блоку три питання:
+1. **Стилі** — чи відповідає дизайну, чи адаптивний, чи є в обох темах.
+2. **Функціонал** — чи працює те, що має (стани: порожньо / завантаження / помилка).
+3. **Адмінка** — чи може клієнт змінити це сам, без розробника.
+
+#### Інвентар захардкодженого (звірено з кодом)
+
+| Де | Що | Куди винести |
+|---|---|---|
+| `pages/index.vue` | hero (заголовок/текст), заголовки секцій, CTA-секція | `settings` |
+| `pages/index.vue` | 4 принципи «філософії» (`home.principles.*`) | ресурс `principles` |
+| `pages/contacts.vue:64-68` | `Kyiv, Ukraine`, `+380 00 000 0000`, `hello@example.com` | `settings` |
+| `PublicHeader.vue:38`, `PublicFooter.vue:12`, `layouts/admin.vue:26`, `layouts/auth.vue:13` | бренд `Obsigma` — у чотирьох місцях + `site.name` у `nuxt.config` | `settings` |
+
+Дрібні тексти (hero / CTA / контакти / бренд) → узагальнений **key-value ресурс `settings`**,
+щоб не плодити окрему модель під кожен рядок. Мультимовність: або колонка на локаль
+(`valueUk` / `valueEn`), або `key + locale` як складений унікальний ключ — вирішити на старті,
+бо переїжджати потім дорого.
+
+#### Полірування адмінки (паралельно)
+- [ ] Бейджі статусу в таблиці замість голого switch.
+- [ ] Кращі порожні стани (зараз просто «Немає записів»).
+- [ ] Bulk-дії (масове видалення / публікація).
+- [ ] Видалення файлу зі сховища, коли поле картинки очищають (зараз лишається сирота).
+
+#### ✓ Уже зняте з цього списку
+- ~~**SEO-мета** сторінок (metaTitle / metaDescription)~~ — поля в адмінці для blog / projects / pages.
+- ~~**Зображення**~~ — upload замість URL-поля.
+- ~~**Контент**~~ — rich-text редактор замість `<textarea>` з HTML.
+- ~~**Рік у підвалі**~~ — був літералом `{{ 2026 }}`, тепер обчислюваний.
 
 ### 🟢 Later
 - [ ] **💳 Оплата** (Stripe) — продаж послуг онлайн.
@@ -139,7 +173,7 @@ nuxt-admin-starter/
 
 - [x] **Тіло статей у SSR-HTML** — санітизація ізоморфна (`isomorphic-dompurify`), контент рендериться на сервері. ✓
 - [x] **Per-page meta** — композабл `usePageSeo` (`app/composables/useSeo.ts`) на всіх публічних роутах. ✓
-- [x] **Open Graph + Twitter cards** — там же; `og:image` абсолютизується. ✓
+- [x] **Open Graph + Twitter cards** — там же; `og:image` абсолютизується. Дефолт `/og-default.png` (1200×630), тож сторінка без власної картинки все одно дає `summary_large_image`. Пріоритет: `ogImage` запису → `imagePath` → дефолт. ✓
 - [x] **sitemap.xml** — `@nuxtjs/sitemap` + динамічне джерело `server/api/__sitemap__/urls.ts` (лише `isPublished`). ✓
 - [x] **robots.txt** — `@nuxtjs/robots` (`/admin`, `/api/` закриті; auth-заглушки `noindex`). ✓
 - [x] **Canonical URL** — на кожній сторінці; `/page/about-page` каноніклиться на `/about`. ✓
@@ -150,6 +184,47 @@ nuxt-admin-starter/
 - [ ] **Продуктивність** (Core Web Vitals) — lazy-load зображень, оптимізація.
 
 **Змінна оточення:** `NUXT_PUBLIC_SITE_URL` — реальний домен у проді (без слеша в кінці). Без неї canonical/og/sitemap вкажуть на `http://localhost:3000`.
+
+---
+
+## ⚠️ Інваріанти (легко зламати, правлячи стилі)
+
+Кожен пункт — про реальний баг, який уже ловили. Порушиш — воно не впаде, просто зіпсується.
+
+**Ширина сторінки.** `.app-container` живе **тільки** в `layouts/default.vue`. У сторінках його не дублювати.
+Вузькі шели (`.pub-article`, `.pub-faq`) вкладаються всередину і **не мають горизонтального padding** —
+його дає контейнер. Full-bleed секція (тло на всю ширину вікна) тепер вимагає свідомого виходу з контейнера,
+напр. `margin-inline: calc(50% - 50vw)`.
+
+**Темна тема.** `--color-surface-base` **дорівнює** `--color-bg` в обох темах. Це не випадковість:
+адмін-шел обмежений 1200px, і сайдбар/топбар іншого відтінку малюють видимий шов по краю шела.
+Для піднятих поверхонь (поповери, дропдауни, картки) — `--color-surface`.
+
+**Адаптив адмінки.** `padding-right: 0` у `.admin__content` працює лише поки відцентрований 1200px-шел
+лишає зовнішній зазор. Тому: `<1264px` → `padding-right: 32px`, `<1024px` (сайдбар стає драйвером) → `16px`.
+Міняючи `max-width` шела — перерахувати поріг `1264 = 1200 + 2×32`.
+
+**Скрол-лок.** Повноекранні оверлеї блокують скрол через `app.SET_FIXED_STATUS(true)` → клас `html.app-fix`
+(CSS у `_base.scss`). Не робити `overflow: hidden` руками.
+
+**Мобільне меню.** Показ/приховування — `opacity` + `pointer-events` + `visibility`, ніколи `display`
+(не анімується, а без `visibility` посилання лишаються в tab-порядку). Висота — `100dvh`, не `100vh`.
+
+**Санітайзер вирішує, що доживе до сторінки.** `ALLOWED_TAGS` в `app/utils/sanitize.ts` — це контракт
+із rich-text редактором. Додав кнопку в редактор (таблиця, відео) — **спочатку** додай тег в allowlist,
+інакше редактор пише, а сайт мовчки вирізає. `iframe` заборонено свідомо.
+
+**Завантаження файлів.** Тип визначається за магічними байтами, а не за `Content-Type` від браузера.
+Ліміт 5 МБ. SVG заборонено (може нести `<script>`, а віддаємо ми з власного origin).
+
+**Адмінка — SPA** (`routeRules: '/admin/**': { ssr: false }`). `useSeoMeta` там не потрібен.
+
+**`og:image` абсолютний і будується від `site.url`.** Без `NUXT_PUBLIC_SITE_URL` у проді кожна сторінка
+віддасть соцмережам посилання на `http://localhost:3000` — картка буде порожня. Раніше це били лише сторінки
+з власною картинкою, тепер — усі, бо є дефолт.
+
+**i18n.** `detectBrowserLanguage` вимкнено навмисно (див. нюанс вище). `hreflang` неможливий при
+`strategy: 'no_prefix'` — обидві локалі на одній URL.
 
 ---
 

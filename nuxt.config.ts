@@ -46,6 +46,16 @@ export default defineNuxtConfig({
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
     layoutTransition: { name: 'layout', mode: 'out-in' },
+
+    head: {
+      link: [
+        // favicon.ico is picked up from /public by convention; the rest need declaring.
+        { rel: 'icon', type: 'image/png', sizes: '96x96', href: '/favicon-96x96.png' },
+        { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
+        { rel: 'manifest', href: '/site.webmanifest' },
+      ],
+      meta: [{ name: 'theme-color', content: '#1b2f47' }],
+    },
   },
 
   modules: [
@@ -80,7 +90,7 @@ export default defineNuxtConfig({
   // Override per environment with NUXT_PUBLIC_SITE_URL.
   site: {
     url: process.env.NUXT_PUBLIC_SITE_URL || 'http://localhost:3000',
-    name: 'Starter',
+    name: 'Obsigma',
   },
 
   robots: {

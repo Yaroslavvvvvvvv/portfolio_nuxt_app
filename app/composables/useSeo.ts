@@ -1,3 +1,7 @@
+// Branded fallback so pages without their own artwork still get a social preview
+// instead of an empty card. Overridden per record by the admin `ogImage` field.
+const DEFAULT_OG_IMAGE = '/og-default.png'
+
 export interface PageSeo {
   title?: string | null
   description?: string | null
@@ -30,7 +34,7 @@ export function usePageSeo(source: () => PageSeo) {
   const toAbsolute = useAbsoluteUrl()
 
   const canonical = computed(() => new URL(source().canonicalPath || route.path, site.url).toString())
-  const image = computed(() => toAbsolute(source().image))
+  const image = computed(() => toAbsolute(source().image || DEFAULT_OG_IMAGE))
 
   useSeoMeta({
     title: () => source().title || undefined,

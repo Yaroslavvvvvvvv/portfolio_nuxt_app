@@ -22,8 +22,8 @@ function closeSidebar() {
   <div class="admin">
     <aside class="admin__sidebar" :class="{ 'admin__sidebar--open': sidebarOpen }">
       <NuxtLink to="/admin" class="admin-brand" @click="closeSidebar">
-        <span class="admin-brand__logo"><i class="pi pi-bolt" /></span>
-        <span>Admin Starter</span>
+        <span class="admin-brand__logo">Σ</span>
+        <span>Obsigma</span>
       </NuxtLink>
       <nav class="admin-nav">
         <NuxtLink to="/admin" class="admin-nav__link" @click="closeSidebar">
